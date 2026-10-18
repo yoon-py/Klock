@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>튜토리얼 - 미션 고르기</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600&amp;family=IBM+Plex+Sans+KR:wght@300;400;500;600&amp;display=swap">
+<style>
+:root{--ease-out:cubic-bezier(0.23,1,0.32,1);--ease-drawer:cubic-bezier(0.32,0.72,0,1)}
+html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+a,button{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:transform 160ms var(--ease-out),opacity 160ms var(--ease-out),background-color 160ms ease,color 160ms ease}
+a:active,button:active{transform:scale(0.97)}
+[data-row]:active{transform:none;background-color:rgba(255,255,255,0.06)!important}
+[data-plain]:active,[role=switch]:active,nav a:active{transform:none}
+nav a:active{opacity:0.55}
+.sheet{animation:sheet-in 500ms var(--ease-drawer) both}
+@keyframes sheet-in{from{transform:translateY(100%)}}
+@keyframes fade-in{from{opacity:0}}
+@media (prefers-reduced-motion: reduce){.sheet{animation:fade-in 200ms ease both}}
+a:focus-visible,button:focus-visible{outline:2px solid #FF9F0A;outline-offset:2px}
+.sheet>*{flex-shrink:0}.rise{animation:rise-in 460ms var(--ease-drawer) both}@keyframes rise-in{from{transform:translateY(100%)}}.dim{animation:dim-in 300ms ease both}@keyframes dim-in{from{opacity:0}}@media (prefers-reduced-motion: reduce){.rise,.dim{animation:dim-in 200ms ease both}}
+@keyframes coach-pulse{0%{box-shadow:0 0 0 0 rgba(255,181,71,0.55),0 0 0 2000px rgba(2,2,8,0.74)}70%{box-shadow:0 0 0 14px rgba(255,181,71,0),0 0 0 2000px rgba(2,2,8,0.74)}100%{box-shadow:0 0 0 0 rgba(255,181,71,0),0 0 0 2000px rgba(2,2,8,0.74)}}
+@keyframes coach-in{from{opacity:0;transform:translateY(6px)}}
+.coach-spot{animation:coach-pulse 1.8s ease-out infinite;transition:left 380ms var(--ease-out),top 380ms var(--ease-out),width 380ms var(--ease-out),height 380ms var(--ease-out)}
+.coach-bubble{animation:coach-in 320ms var(--ease-out) both}
+@media (prefers-reduced-motion: reduce){.coach-spot{animation:none;box-shadow:0 0 0 2000px rgba(2,2,8,0.74);transition:none}.coach-bubble{animation:none}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding-top: 0px; background: #000000; color: #FFFFFF; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Apple SD Gothic Neo', 'IBM Plex Sans KR', 'IBM Plex Sans', sans-serif; word-break: keep-all; font-variant-numeric: tabular-nums; position: relative; overflow: hidden; -webkit-font-smoothing: antialiased">
+<div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 54px; padding-top: 6px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; z-index: 30; pointer-events: none; color: #FFFFFF; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'IBM Plex Sans', sans-serif; font-size: 17px; font-weight: 600; letter-spacing: -0.3px;"><span style="width: 132px; text-align: center">12:02</span><span style="position: absolute; top: 11px; left: 50%; width: 126px; height: 37px; margin-left: -63px; border-radius: 20px; background: #000000"></span><span style="width: 132px; display: flex; align-items: center; justify-content: center; gap: 6px"><svg width="18" height="12" viewBox="0 0 18 12" fill="#FFFFFF"><rect x="0" y="8" width="3" height="4" rx="1"></rect><rect x="5" y="5.5" width="3" height="6.5" rx="1"></rect><rect x="10" y="3" width="3" height="9" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></svg><svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"><path d="M1.5 4.4a9.3 9.3 0 0 1 13 0"></path><path d="M4.1 7.1a5.6 5.6 0 0 1 7.8 0"></path><circle cx="8" cy="10" r="1.3" fill="#FFFFFF" stroke="none"></circle></svg><svg width="27" height="13" viewBox="0 0 27 13"><rect x="0.5" y="0.5" width="23" height="12" rx="3.8" fill="none" stroke="#FFFFFF" stroke-opacity="0.4"></rect><rect x="2" y="2" width="17" height="9" rx="2.4" fill="#FFFFFF"></rect><path d="M25 4.6v3.8c.8-.3 1.3-1.1 1.3-1.9s-.5-1.6-1.3-1.9z" fill="#FFFFFF" fill-opacity="0.45"></path></svg></span></div><span aria-hidden="true" style="position: absolute; left: 50%; bottom: 8px; width: 134px; height: 5px; margin-left: -67px; border-radius: 3px; background: #FFFFFF; opacity: 0.85; z-index: 30; pointer-events: none"></span><div data-tour="kinds" class="rise" role="dialog" aria-label="미션" style="position: absolute; top: 50px; left: 0; right: 0; bottom: 0; border-radius: 34px 34px 0 0; background: #1C1C1E; box-shadow: inset 0 1px 0 rgba(255,255,255,0.08)"><div style="position: relative; height: 64px; display: flex; align-items: center; justify-content: center"><span style="font-size: 17px; font-weight: 600">미션</span><a href="TourPlanEdit2.dc.html" aria-label="닫기" style="position: absolute; right: 12px; top: 10px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M3 3l14 14M17 3L3 17"></path></svg></a></div><div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 12px 0"><span style="font-size: 15px; color: #98989F; padding: 0 12px 4px">몸부터 깨우는 미션</span><button data-tour="squat" type="button" onClick="{{m0Pick}}" aria-disabled="{{m0Added}}" style="{{m0Row}}"><span aria-hidden="true" style="width: 56px; height: 56px; border-radius: 15px; background: #3A2F57; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#C3A6FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="4.2" r="2" fill="#C3A6FF" stroke="none"></circle><path d="M9 21l2.6-6.2L14.5 17v4"></path><path d="M11.6 14.8 12.4 8l3.4 3.2 3 .6"></path><path d="M12.4 8 8.6 9.6 7 12.6"></path></svg></span><span style="font-size: 18px">스쿼트</span><span style="height: 26px; padding: 0 10px; border-radius: 13px; background: rgba(255,214,10,0.14); color: #FFD60A; font-size: 13px; font-weight: 700; display: flex; align-items: center; flex-shrink: 0">기본</span><svg width="20" height="16" viewBox="0 0 20 16" fill="none" stroke="#FF9F0A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{m0Check}}"><path d="M2 8.5l5 5L18 2.5"></path></svg></button><button type="button" onClick="{{m1Pick}}" aria-disabled="{{m1Added}}" style="{{m1Row}}"><span aria-hidden="true" style="width: 56px; height: 56px; border-radius: 15px; background: #3A2F57; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><g fill="#C3A6FF"><ellipse cx="8.2" cy="7.5" rx="3" ry="4.6" transform="rotate(-8 8.2 7.5)"></ellipse><ellipse cx="8.8" cy="15.4" rx="2.2" ry="1.9"></ellipse><ellipse cx="15.8" cy="10.5" rx="3" ry="4.6" transform="rotate(8 15.8 10.5)"></ellipse><ellipse cx="15.2" cy="18.4" rx="2.2" ry="1.9"></ellipse></g></svg></span><span style="font-size: 18px">걷기</span><svg width="20" height="16" viewBox="0 0 20 16" fill="none" stroke="#FF9F0A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{m1Check}}"><path d="M2 8.5l5 5L18 2.5"></path></svg></button></div><div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 12px 0"><span style="font-size: 15px; color: #98989F; padding: 0 12px 4px">침대에서 멀어지는 미션</span><button type="button" onClick="{{m2Pick}}" aria-disabled="{{m2Added}}" style="{{m2Row}}"><span aria-hidden="true" style="width: 56px; height: 56px; border-radius: 15px; background: #4A2229; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FF7B86" d="M9 4.5h6l1.4 2.2H19a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8.7a2 2 0 0 1 2-2h2.6z"></path><circle cx="12" cy="13" r="3.6" fill="none" stroke="#00000055" stroke-width="1.8"></circle></svg></span><span style="font-size: 18px">사진 찍기</span><svg width="20" height="16" viewBox="0 0 20 16" fill="none" stroke="#FF9F0A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{m2Check}}"><path d="M2 8.5l5 5L18 2.5"></path></svg></button><button type="button" onClick="{{m3Pick}}" aria-disabled="{{m3Added}}" style="{{m3Row}}"><span aria-hidden="true" style="width: 56px; height: 56px; border-radius: 15px; background: #4A2229; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FF7B86" stroke-linecap="round" aria-hidden="true"><path d="M4 5v14M7 5v14M11 5v14M14 5v14M18 5v14M20.5 5v14" stroke-width="1.6"></path><path d="M8.8 5v14M16 5v14" stroke-width="0.9"></path></svg></span><span style="font-size: 18px">바코드 찍기</span><svg width="20" height="16" viewBox="0 0 20 16" fill="none" stroke="#FF9F0A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{m3Check}}"><path d="M2 8.5l5 5L18 2.5"></path></svg></button></div><div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 12px 0"><span style="font-size: 15px; color: #98989F; padding: 0 12px 4px">입으로 깨우는 미션</span><button type="button" onClick="{{m4Pick}}" aria-disabled="{{m4Added}}" style="{{m4Row}}"><span aria-hidden="true" style="width: 56px; height: 56px; border-radius: 15px; background: #1F3A47; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="2.5" width="7" height="12" rx="3.5" fill="#6AD0F5"></rect><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5v3.5" fill="none" stroke="#6AD0F5" stroke-width="2" stroke-linecap="round"></path></svg></span><span style="font-size: 18px">따라 말하기</span><svg width="20" height="16" viewBox="0 0 20 16" fill="none" stroke="#FF9F0A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{m4Check}}"><path d="M2 8.5l5 5L18 2.5"></path></svg></button><button type="button" onClick="{{m5Pick}}" aria-disabled="{{m5Added}}" style="{{m5Row}}"><span aria-hidden="true" style="width: 56px; height: 56px; border-radius: 15px; background: #1F3A47; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><g fill="#6AD0F5"><circle cx="7" cy="18.5" r="3"></circle><circle cx="17" cy="16.5" r="3"></circle><path d="M10 18.5V5.3a1 1 0 0 1 1.26-.97l8 2.2a1 1 0 0 1 .74.97v9"></path></g></svg></span><span style="font-size: 18px">리듬 맞춰 말하기</span><svg width="20" height="16" viewBox="0 0 20 16" fill="none" stroke="#FF9F0A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{m5Check}}"><path d="M2 8.5l5 5L18 2.5"></path></svg></button></div></div>
+
+<sc-if value="{{tourOn}}" hint-placeholder-val="{{ true }}">
+<div style="{{tb1}}"></div><div style="{{tb2}}"></div><div style="{{tb3}}"></div><div style="{{tb4}}"></div>
+<sc-if value="{{tourCover}}" hint-placeholder-val="{{ false }}"><div style="{{tourHole}}"></div></sc-if>
+<div class="coach-spot" aria-hidden="true" style="{{tourSpot}}"></div>
+<div class="coach-bubble" role="dialog" aria-label="사용 안내" style="{{tourBubble}}">
+  <span aria-hidden="true" style="{{tourArrow}}"></span>
+  <div style="display: flex; align-items: center; justify-content: space-between; height: 22px">
+    <span style="display: flex; gap: 5px; align-items: center"><sc-for list="{{tourDots}}" as="d" hint-placeholder-count="16"><span style="{{d}}"></span></sc-for></span>
+  </div>
+  <div style="margin-top: 8px; font-size: 19px; font-weight: 700; letter-spacing: -0.3px; line-height: 1.3">{{tourTitle}}</div>
+  <div style="margin-top: 6px; font-size: 15px; line-height: 1.5; color: #4A4236">{{tourBody}}</div>
+  <sc-if value="{{tourIsNext}}" hint-placeholder-val="{{ true }}">
+    <div style="margin-top: 14px; display: flex; align-items: center; justify-content: space-between">
+      <span style="font-size: 13px; color: #8A7F6E">{{tourCount}}</span>
+      <button type="button" onClick="{{tourNext}}" style="height: 42px; padding: 0 20px; border: none; border-radius: 21px; background: #1A1205; color: #FFB547; font-size: 15px; font-weight: 600">{{tourNextLabel}}</button>
+    </div>
+  </sc-if>
+  <sc-if value="{{tourIsTap}}" hint-placeholder-val="{{ false }}">
+    <div style="margin-top: 12px; display: flex; align-items: center; justify-content: space-between">
+      <span style="font-size: 13px; color: #8A7F6E">{{tourCount}}</span>
+      <span style="display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #B36B00"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5" fill="#FFB547"></circle><circle cx="12" cy="12" r="10" fill="none" stroke="#FFB547" stroke-width="2" opacity="0.5"></circle></svg>{{tourHint}}</span>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tour: 0, tourOff: false, missions: [0], sheet: true, at: null };
+  }
+  renderVals() { return Object.assign(this.baseVals(), this.tourVals()); }
+
+  tourVals() {
+    const STEPS = [{"n": 4, "rect": [16, 116, 358, 372, 18], "mode": "next", "title": "어떻게 깨울지 골라요", "body": "몸을 움직이거나(스쿼트·걷기), 침대에서 멀리 가거나(사진·바코드), 소리 내서(따라 말하기·리듬 맞춰 말하기) 깨워요. 여러 개 고르면 차례로 모두 끝내야 꺼져요."}, {"n": 5, "rect": [12, 156, 366, 72, 16], "pad": 4, "mode": "next", "title": "처음엔 스쿼트예요", "body": "폰을 두 손으로 잡고 앉았다 일어나면 폰의 움직임 센서가 세요. 카메라는 쓰지 않아요. 고른 미션 칸을 누르면 자세히 정할 수 있어요.", "nextLabel": "스쿼트 열어 보기", "href": "TourMissionSet.dc.html"}];
+    const st = this.state;
+    const i = st.tour || 0;
+    const s = STEPS[i];
+    const on = !st.tourOff && !!s;
+    if (!on) return { tourOn: false, tourCover: false, tourIsNext: false, tourIsTap: false, tourDots: [], tb1: '', tb2: '', tb3: '', tb4: '', tourHole: '', tourSpot: '', tourBubble: '', tourArrow: '', tourTitle: '', tourBody: '', tourCount: '', tourHint: '', tourNextLabel: '', tourNext: () => {} };
+    const [x, y, w, h, r] = s.rect;
+    const pad = s.pad || 6;
+    const L = x - pad, T = y - pad, Wd = w + pad * 2, Ht = h + pad * 2;
+    const blk = 'position: absolute; z-index: 40; ';
+    const H = 844;
+    const below = s.below !== undefined ? s.below : (y + h / 2) < H * 400 / 844;
+    const cx = x + w / 2;
+    const arrowLeft = Math.max(22, Math.min(300, cx - 24 - 9));
+    const total = 16;
+    const n = s.n;
+    return {
+      tourOn: true,
+      tourCover: s.mode !== 'tap' && !s.live,
+      tourIsNext: s.mode !== 'tap',
+      tourIsTap: s.mode === 'tap',
+      tourDots: Array.from({ length: total }, (_, k) => 'width: ' + (k === n - 1 ? 16 : 6) + 'px; height: 6px; border-radius: 3px; background: ' + (k < n ? '#FFB547' : 'rgba(26,18,5,0.16)') + '; transition: width 300ms ease'),
+      tb1: blk + 'left: 0; right: 0; top: 0; height: ' + T + 'px',
+      tb2: blk + 'left: 0; right: 0; top: ' + (T + Ht) + 'px; bottom: 0',
+      tb3: blk + 'left: 0; width: ' + L + 'px; top: ' + T + 'px; height: ' + Ht + 'px',
+      tb4: blk + 'left: ' + (L + Wd) + 'px; right: 0; top: ' + T + 'px; height: ' + Ht + 'px',
+      tourHole: blk + 'left: ' + L + 'px; top: ' + T + 'px; width: ' + Wd + 'px; height: ' + Ht + 'px',
+      tourSpot: 'position: absolute; z-index: 41; pointer-events: none; box-sizing: border-box; border: 2px solid #FFB547; left: ' + L + 'px; top: ' + T + 'px; width: ' + Wd + 'px; height: ' + Ht + 'px; border-radius: ' + (r + pad) + 'px',
+      tourBubble: 'position: absolute; z-index: 42; left: 20px; right: 20px; box-sizing: border-box; padding: 14px 18px 16px; border-radius: 22px; background: #FBF6EC; color: #17130C; box-shadow: 0 18px 40px rgba(0,0,0,0.5); ' + (below ? 'top: ' + (T + Ht + 16) + 'px' : 'bottom: ' + (H - T + 16) + 'px'),
+      tourArrow: 'position: absolute; left: ' + arrowLeft + 'px; width: 18px; height: 18px; background: #FBF6EC; border-radius: 3px; transform: rotate(45deg); ' + (below ? 'top: -7px' : 'bottom: -7px'),
+      tourTitle: s.title,
+      tourBody: s.body,
+      tourCount: n + ' / ' + total,
+      tourHint: s.hint || '',
+      tourNextLabel: s.nextLabel || '다음',
+      tourNext: () => { if (s.href) { window.location.href = s.href; return; } this.setState({ tour: i + 1 }); }
+    };
+  }
+
+  baseVals() {
+
+    const S0 = this.state, me = this;
+    const MN = ["스쿼트", "걷기", "사진 찍기", "바코드 찍기", "따라 말하기", "리듬 맞춰 말하기"], MBG = ["#3A2F57", "#3A2F57", "#4A2229", "#4A2229", "#1F3A47", "#1F3A47"];
+    const COUNT_HREF = {"0": "MissionCountSquat.dc.html", "1": "MissionCountWalk.dc.html", "2": "MissionPhotoSet.dc.html", "3": "CodeRegister.dc.html", "5": "MissionRhythmSet.dc.html"};
+    const mbuzz = () => { try { if (navigator.vibrate) navigator.vibrate(8); } catch (e) {} };
+    const list = S0.missions, at = S0.at;
+    const obj = (w) => { const c = w.charCodeAt(w.length - 1) - 0xAC00; return c >= 0 && c % 28 ? '을' : '를'; };
+    const mv = {
+      missionCount: list.length + '/5',
+      missionLine: list.length === 1 ? MN[list[0]] + obj(MN[list[0]]) + ' 끝내야 알람이 꺼져요.' : list.map((k) => MN[k]).join(' → ') + ' 순서로 모두 끝내야 꺼져요.',
+      sheetOpen: !!S0.sheet,
+      closeSheet: () => me.setState({ sheet: false, at: null })
+    };
+    for (let i = 0; i < 5; i++) {
+      const k = i < list.length ? list[i] : -1, empty = k < 0, next = i === list.length, p = 's' + i;
+      mv[p + 'Empty'] = empty;
+      for (let j = 0; j < 6; j++) mv[p + 'K' + j] = k === j;
+      mv[p + 'Aria'] = empty ? '미션 더하기' : (i + 1) + '번째 미션 ' + MN[k] + (COUNT_HREF[k] ? ', 눌러서 설정' : ', 눌러서 바꾸기');
+      mv[p + 'Tap'] = () => {
+        mbuzz();
+        if (!empty && COUNT_HREF[k]) { window.location.href = COUNT_HREF[k]; return; }
+        me.setState({ sheet: true, at: empty ? null : i });
+      };
+      mv[p + 'Box'] = 'width: 100%; aspect-ratio: 1; box-sizing: border-box; border-radius: 14px; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 200ms ease; ' +
+        (empty ? 'border: 1px solid rgba(255,255,255,' + (next ? '0.14' : '0.07') + '); background: ' + (next ? '#3A3A3C' : 'transparent') : 'border: none; background: ' + MBG[k]);
+      mv[p + 'PlusS'] = 'stroke: ' + (next ? '#FFFFFF' : '#636366');
+      mv[p + 'CanRemove'] = !empty && list.length > 1;
+      mv[p + 'Remove'] = () => { const n = list.slice(); n.splice(i, 1); mbuzz(); me.setState({ missions: n }); };
+      mv[p + 'RemoveAria'] = empty ? '' : MN[k] + ' 빼기';
+    }
+    for (let j = 0; j < 6; j++) {
+      const added = list.indexOf(j) >= 0, p = 'm' + j;
+      mv[p + 'Added'] = added ? 'true' : 'false';
+      mv[p + 'Pick'] = () => {
+        if (added) return;
+        const n = list.slice();
+        if (at !== null && at !== undefined) n[at] = j; else if (n.length < 5) n.push(j);
+        mbuzz(); me.setState({ missions: n, sheet: false, at: null });
+      };
+      mv[p + 'Row'] = 'display: flex; align-items: center; gap: 18px; width: 100%; min-height: 72px; padding: 8px 12px; border: none; border-radius: 16px; background: none; color: #FFFFFF; text-align: left; transition: opacity 200ms ease; cursor: ' + (added ? 'default' : 'pointer') + '; opacity: 1';
+      mv[p + 'Check'] = 'margin-left: auto; flex-shrink: 0; opacity: ' + (added ? 1 : 0);
+    }
+
+    return mv;
+  }
+}
+</script>
+</body>
+</html>

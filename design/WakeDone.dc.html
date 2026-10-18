@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>아침 잠금 해제</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600&amp;family=IBM+Plex+Sans+KR:wght@300;400;500;600&amp;display=swap">
+<style>
+:root{--ease-out:cubic-bezier(0.23,1,0.32,1);--ease-drawer:cubic-bezier(0.32,0.72,0,1)}
+html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+a,button{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:transform 160ms var(--ease-out),opacity 160ms var(--ease-out),background-color 160ms ease,color 160ms ease}
+a:active,button:active{transform:scale(0.97)}
+[data-row]:active{transform:none;background-color:rgba(255,255,255,0.06)!important}
+[data-plain]:active,[role=switch]:active,nav a:active{transform:none}
+nav a:active{opacity:0.55}
+.sheet{animation:sheet-in 500ms var(--ease-drawer) both}
+@keyframes sheet-in{from{transform:translateY(100%)}}
+@keyframes fade-in{from{opacity:0}}
+@media (prefers-reduced-motion: reduce){.sheet{animation:fade-in 200ms ease both}}
+a:focus-visible,button:focus-visible{outline:2px solid #C26A00;outline-offset:2px}
+.draw-circle{stroke-dasharray:63;stroke-dashoffset:63;animation:draw 700ms var(--ease-out) 150ms forwards}
+.draw-check{stroke-dasharray:16;stroke-dashoffset:16;animation:draw 360ms var(--ease-out) 700ms forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.rise{animation:rise 1200ms var(--ease-out) both}
+@keyframes rise{from{transform:translateY(60px);opacity:0}}
+@media (prefers-reduced-motion: reduce){.draw-circle,.draw-check{animation:none;stroke-dashoffset:0}.rise{animation:fade-in 200ms ease both}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding-top: 54px; background: linear-gradient(180deg, #FFF6E8 0%, #FFEACB 46%, #FFD596 100%); color: #2B1A04; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Apple SD Gothic Neo', 'IBM Plex Sans KR', 'IBM Plex Sans', sans-serif; word-break: keep-all; font-variant-numeric: tabular-nums; position: relative; overflow: hidden; -webkit-font-smoothing: antialiased">
+<div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 54px; padding-top: 6px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; z-index: 30; pointer-events: none; color: #2B1A04; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'IBM Plex Sans', sans-serif; font-size: 17px; font-weight: 600; letter-spacing: -0.3px;"><span style="width: 132px; text-align: center">7:05</span><span style="position: absolute; top: 11px; left: 50%; width: 126px; height: 37px; margin-left: -63px; border-radius: 20px; background: #000000"></span><span style="width: 132px; display: flex; align-items: center; justify-content: center; gap: 6px"><svg width="18" height="12" viewBox="0 0 18 12" fill="#2B1A04"><rect x="0" y="8" width="3" height="4" rx="1"></rect><rect x="5" y="5.5" width="3" height="6.5" rx="1"></rect><rect x="10" y="3" width="3" height="9" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></svg><svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="#2B1A04" stroke-width="1.8" stroke-linecap="round"><path d="M1.5 4.4a9.3 9.3 0 0 1 13 0"></path><path d="M4.1 7.1a5.6 5.6 0 0 1 7.8 0"></path><circle cx="8" cy="10" r="1.3" fill="#2B1A04" stroke="none"></circle></svg><svg width="27" height="13" viewBox="0 0 27 13"><rect x="0.5" y="0.5" width="23" height="12" rx="3.8" fill="none" stroke="#2B1A04" stroke-opacity="0.4"></rect><rect x="2" y="2" width="17" height="9" rx="2.4" fill="#2B1A04"></rect><path d="M25 4.6v3.8c.8-.3 1.3-1.1 1.3-1.9s-.5-1.6-1.3-1.9z" fill="#2B1A04" fill-opacity="0.45"></path></svg></span></div><span aria-hidden="true" style="position: absolute; left: 50%; bottom: 8px; width: 134px; height: 5px; margin-left: -67px; border-radius: 3px; background: #2B1A04; opacity: 0.6; z-index: 30; pointer-events: none"></span><div aria-hidden="true" class="rise" style="position: absolute; left: 50%; bottom: -250px; width: 520px; height: 520px; margin-left: -260px; border-radius: 50%; background: radial-gradient(circle, #FFC15E 0%, rgba(255,181,71,0.55) 38%, rgba(255,181,71,0) 70%)"></div><div style="position: relative; padding: 70px 28px 0; display: flex; flex-direction: column; gap: 10px"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#C26A00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle class="draw-circle" cx="12" cy="12" r="10" transform="rotate(-90 12 12)"></circle><path class="draw-check" d="M7.5 12.5l3 3 6-6.5"></path></svg><span style="margin-top: 14px; font-size: 15px; font-weight: 600; color: #A65A00">미션 완료</span><span style="font-size: 36px; font-weight: 700; letter-spacing: -0.8px; color: #2B1A04">좋은 아침이에요</span><span style="font-size: 18px; line-height: 1.5; color: #6E5326">이제 모든 앱을 사용할 수 있어요.</span></div><div style="position: relative; margin: 34px 20px 0; border-radius: 22px; background: rgba(255,255,255,0.62); box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset, 0 8px 24px rgba(150,90,0,0.08); padding: 18px 20px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px"><span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 13px; color: #6E5326">알람에서 일어나기까지</span><span style="font-size: 26px; font-weight: 600; color: #2B1A04">4<span style="font-size: 15px; font-weight: 500"> 분</span></span><span style="font-size: 13px; color: #6E5326">07:00 → 07:04</span></span><span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 13px; color: #6E5326">어젯밤 잠</span><span style="font-size: 26px; font-weight: 600; color: #2B1A04">7<span style="font-size: 15px; font-weight: 500"> 시간 </span>10<span style="font-size: 15px; font-weight: 500"> 분</span></span><span style="font-size: 13px; color: #6E5326">수면 점수 82 · 추정</span></span></div><div style="position: relative; margin: 12px 20px 0; padding: 12px 16px; border-radius: 14px; background: rgba(194,106,0,0.1); display: flex; align-items: center; gap: 10px; font-size: 14px; color: #7A4A00"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A65A00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"></path><path d="M19.6 3.8v4.6H15"></path></svg>5분 뒤에 일어나 계신지 한 번 더 물어볼게요</div><a href="Records.dc.html" style="position: absolute; left: 20px; right: 20px; bottom: 44px; height: 56px; border-radius: 16px; background: #2B1A04; color: #FFF6E8; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 600">어젯밤 리포트 보기</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+return {};
+  }
+}
+</script>
+</body>
+</html>

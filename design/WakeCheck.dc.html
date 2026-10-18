@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>일어나 계세요</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600&amp;family=IBM+Plex+Sans+KR:wght@300;400;500;600&amp;display=swap">
+<style>
+:root{--ease-out:cubic-bezier(0.23,1,0.32,1);--ease-drawer:cubic-bezier(0.32,0.72,0,1)}
+html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+a,button{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:transform 160ms var(--ease-out),opacity 160ms var(--ease-out),background-color 160ms ease,color 160ms ease}
+a:active,button:active{transform:scale(0.97)}
+[data-row]:active{transform:none;background-color:rgba(255,255,255,0.06)!important}
+[data-plain]:active,[role=switch]:active,nav a:active{transform:none}
+nav a:active{opacity:0.55}
+.sheet{animation:sheet-in 500ms var(--ease-drawer) both}
+@keyframes sheet-in{from{transform:translateY(100%)}}
+@keyframes fade-in{from{opacity:0}}
+@media (prefers-reduced-motion: reduce){.sheet{animation:fade-in 200ms ease both}}
+a:focus-visible,button:focus-visible{outline:2px solid #FFB547;outline-offset:2px}
+.draw-circle{stroke-dasharray:63;stroke-dashoffset:63;animation:draw 560ms var(--ease-out) 60ms forwards}
+.draw-check{stroke-dasharray:14;stroke-dashoffset:14;animation:draw 320ms var(--ease-out) 480ms forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.shake{animation:shake 320ms var(--ease-out)}
+@keyframes shake{20%{transform:translateX(-6px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(2px)}}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}.draw-circle,.draw-check{animation:none;stroke-dashoffset:0}.shake{animation:none}}
+.lvl{transform-origin:50% 50%;animation:lvl 900ms ease-in-out infinite alternate}
+@keyframes lvl{from{transform:scaleY(0.35)}to{transform:scaleY(1)}}
+.pop{animation:pop 380ms var(--ease-out) both}
+@keyframes pop{from{opacity:0;transform:scale(0.9)}}
+@media (prefers-reduced-motion: reduce){.lvl{animation:none}.pop{animation:fade-in 200ms ease both}}
+</style>
+</helmet>
+<div style="{{rootStyle}}">
+<div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 54px; padding-top: 6px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; z-index: 30; pointer-events: none; color: #FFFFFF; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'IBM Plex Sans', sans-serif; font-size: 17px; font-weight: 600; letter-spacing: -0.3px;"><span style="width: 132px; text-align: center">7:22</span><span style="position: absolute; top: 11px; left: 50%; width: 126px; height: 37px; margin-left: -63px; border-radius: 20px; background: #000000"></span><span style="width: 132px; display: flex; align-items: center; justify-content: center; gap: 6px"><svg width="18" height="12" viewBox="0 0 18 12" fill="#FFFFFF"><rect x="0" y="8" width="3" height="4" rx="1"></rect><rect x="5" y="5.5" width="3" height="6.5" rx="1"></rect><rect x="10" y="3" width="3" height="9" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></svg><svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"><path d="M1.5 4.4a9.3 9.3 0 0 1 13 0"></path><path d="M4.1 7.1a5.6 5.6 0 0 1 7.8 0"></path><circle cx="8" cy="10" r="1.3" fill="#FFFFFF" stroke="none"></circle></svg><svg width="27" height="13" viewBox="0 0 27 13"><rect x="0.5" y="0.5" width="23" height="12" rx="3.8" fill="none" stroke="#FFFFFF" stroke-opacity="0.4"></rect><rect x="2" y="2" width="14" height="9" rx="2.4" fill="#FFFFFF"></rect><path d="M25 4.6v3.8c.8-.3 1.3-1.1 1.3-1.9s-.5-1.6-1.3-1.9z" fill="#FFFFFF" fill-opacity="0.45"></path></svg></span></div><span aria-hidden="true" style="position: absolute; left: 50%; bottom: 8px; width: 134px; height: 5px; margin-left: -67px; border-radius: 3px; background: #FFFFFF; opacity: 0.85; z-index: 30; pointer-events: none"></span>
+<sc-if value="{{!ok}}" hint-placeholder-val="{{ true }}">
+  <div style="position: absolute; top: 150px; left: 24px; right: 24px; display: flex; flex-direction: column; align-items: center; text-align: center">
+    <div style="position: relative; width: 180px; height: 180px">
+      <svg width="180" height="180" viewBox="0 0 180 180" aria-hidden="true" style="position: absolute; inset: 0; transform: rotate(-90deg)"><circle cx="90" cy="90" r="82" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="6"></circle><circle cx="90" cy="90" r="82" fill="none" stroke="#FFB547" stroke-width="6" stroke-linecap="round" stroke-dasharray="515.2" stroke-dashoffset="{{offset}}" style="transition: stroke-dashoffset 1s linear"></circle></svg>
+      <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font-size: 46px; font-weight: 300; letter-spacing: -1px">{{left}}</span><span style="font-size: 13px; color: #98989F">남았어요</span></div>
+    </div>
+    <span style="margin-top: 36px; font-size: 30px; font-weight: 700; letter-spacing: -0.5px">일어나 계세요?</span>
+    <span style="margin-top: 10px; font-size: 16px; line-height: 1.5; color: #98989F">시간 안에 누르지 않으면 알람이 다시 울리고,<br>미션 하나를 더 해야 꺼져요.</span>
+  </div>
+  <button type="button" onClick="{{confirm}}" style="position: absolute; left: 20px; right: 20px; bottom: 40px; height: 58px; border-radius: 29px; border: none; background: #FFB547; color: #1A1205; font-size: 18px; font-weight: 600">일어났어요</button>
+</sc-if>
+<sc-if value="{{ok}}" hint-placeholder-val="{{ false }}">
+  <div style="position: absolute; top: 210px; left: 24px; right: 24px; display: flex; flex-direction: column; gap: 10px">
+    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle class="draw-circle" cx="12" cy="12" r="10" transform="rotate(-90 12 12)"></circle><path class="draw-check" d="M7.5 12.5l3 3 6-6.5"></path></svg>
+    <span style="margin-top: 14px; font-size: 30px; font-weight: 600; letter-spacing: -0.5px">확인했어요</span>
+    <span style="font-size: 15px; color: #C7C7CC">오늘 알람은 여기까지예요. 좋은 하루 보내세요.</span>
+  </div>
+  <a href="Records.dc.html" style="position: absolute; left: 20px; right: 20px; bottom: 40px; height: 54px; border-radius: 27px; background: #FFFFFF; color: #000000; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 600">어젯밤 리포트 보기</a>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { ok: false, sec: 102 };
+    // 1초마다 남은 시간을 줄여요
+    this.timer = setInterval(() => {
+      if (this.state.ok || this.state.sec <= 0) return;
+      this.setState({ sec: this.state.sec - 1 });
+    }, 1000);
+  }
+  renderVals() {
+    const { ok, sec } = this.state;
+    const total = 120;
+    return {
+      ok,
+      left: Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0'),
+      offset: (515.2 * (1 - sec / total)).toFixed(1),
+      confirm: () => this.setState({ ok: true }),
+      rootStyle: 'width: 390px; height: 844px; box-sizing: border-box; padding-top: 54px; position: relative; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, SF Pro Text, Apple SD Gothic Neo, IBM Plex Sans KR, IBM Plex Sans, sans-serif; word-break: keep-all; font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; color: #FFFFFF; background: linear-gradient(0deg, #4E3313 0%, #20160A 55%, #000000 100%)'
+    };
+  }
+}
+</script>
+</body>
+</html>

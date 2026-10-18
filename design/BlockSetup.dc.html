@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>앱 제한</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600&amp;family=IBM+Plex+Sans+KR:wght@300;400;500;600&amp;display=swap">
+<style>
+:root{--ease-out:cubic-bezier(0.23,1,0.32,1);--ease-drawer:cubic-bezier(0.32,0.72,0,1)}
+html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+a,button{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:transform 160ms var(--ease-out),opacity 160ms var(--ease-out),background-color 160ms ease,color 160ms ease}
+a:active,button:active{transform:scale(0.97)}
+[data-row]:active{transform:none;background-color:rgba(255,255,255,0.06)!important}
+[data-plain]:active,[role=switch]:active,nav a:active{transform:none}
+nav a:active{opacity:0.55}
+.sheet{animation:sheet-in 500ms var(--ease-drawer) both}
+@keyframes sheet-in{from{transform:translateY(100%)}}
+@keyframes fade-in{from{opacity:0}}
+@media (prefers-reduced-motion: reduce){.sheet{animation:fade-in 200ms ease both}}
+a:focus-visible,button:focus-visible{outline:2px solid #FFB547;outline-offset:2px}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding-top: 54px; background: #000000; color: #FFFFFF; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Apple SD Gothic Neo', 'IBM Plex Sans KR', 'IBM Plex Sans', sans-serif; word-break: keep-all; font-variant-numeric: tabular-nums; position: relative; overflow: hidden; -webkit-font-smoothing: antialiased">
+<div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 54px; padding-top: 6px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; z-index: 30; pointer-events: none; color: #FFFFFF; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'IBM Plex Sans', sans-serif; font-size: 17px; font-weight: 600; letter-spacing: -0.3px;"><span style="width: 132px; text-align: center">4:16</span><span style="position: absolute; top: 11px; left: 50%; width: 126px; height: 37px; margin-left: -63px; border-radius: 20px; background: #000000"></span><span style="width: 132px; display: flex; align-items: center; justify-content: center; gap: 6px"><svg width="18" height="12" viewBox="0 0 18 12" fill="#FFFFFF"><rect x="0" y="8" width="3" height="4" rx="1"></rect><rect x="5" y="5.5" width="3" height="6.5" rx="1"></rect><rect x="10" y="3" width="3" height="9" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></svg><svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"><path d="M1.5 4.4a9.3 9.3 0 0 1 13 0"></path><path d="M4.1 7.1a5.6 5.6 0 0 1 7.8 0"></path><circle cx="8" cy="10" r="1.3" fill="#FFFFFF" stroke="none"></circle></svg><svg width="27" height="13" viewBox="0 0 27 13"><rect x="0.5" y="0.5" width="23" height="12" rx="3.8" fill="none" stroke="#FFFFFF" stroke-opacity="0.4"></rect><rect x="2" y="2" width="17" height="9" rx="2.4" fill="#FFFFFF"></rect><path d="M25 4.6v3.8c.8-.3 1.3-1.1 1.3-1.9s-.5-1.6-1.3-1.9z" fill="#FFFFFF" fill-opacity="0.45"></path></svg></span></div><span aria-hidden="true" style="position: absolute; left: 50%; bottom: 8px; width: 134px; height: 5px; margin-left: -67px; border-radius: 3px; background: #FFFFFF; opacity: 0.85; z-index: 30; pointer-events: none"></span><div style="height: 44px; padding: 0 16px 0 8px; display: flex; align-items: center"><a href="PlanEdit.dc.html" style="height: 44px; display: flex; align-items: center; gap: 6px; font-size: 17px; color: #FFB547; padding-left: 4px"><svg width="12" height="20" viewBox="0 0 12 20" fill="none" stroke="#FFB547" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2L2 10l8 8"></path></svg>수면 | 기상</a></div><div style="padding: 2px 20px 0; display: flex; flex-direction: column; gap: 8px"><span style="font-size: 34px; font-weight: 700; letter-spacing: -0.6px">앱 제한</span><span style="font-size: 15px; line-height: 1.5; color: #98989F">잠그는 시각부터는 아래 앱만 열리고 나머지는 모두 잠겨요. 아침 미션을 끝내면 다시 열려요.</span></div><div style="padding: 20px 16px 0; display: flex; flex-direction: column; gap: 24px"><div data-tour="allow" style="display: flex; flex-direction: column; gap: 7px"><span style="font-size: 13px; color: #98989F; padding-left: 16px">잠그지 않을 앱 · {{count}}개</span><div style="border-radius: 22px; background: #1C1C1E; box-shadow: inset 0 1px 0 rgba(255,255,255,0.05); overflow: hidden"><div style="display: flex; align-items: center; gap: 14px; min-height: 52px; box-sizing: border-box; padding: 10px 16px; background-image: linear-gradient(rgba(84,84,88,0.55), rgba(84,84,88,0.55)); background-size: calc(100% - 60px) 0.5px; background-position: right bottom; background-repeat: no-repeat"><span aria-hidden="true" style="width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(180deg, #2A2C6E, #0F1028); display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#C9C2FF" d="M20.6 14.7a.7.7 0 0 0-.9-.6 7.6 7.6 0 0 1-9.8-9.8.7.7 0 0 0-.6-.9 9 9 0 1 0 11.3 11.3z"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1; min-width: 0"><span style="font-size: 17px">Slipper</span></span><span style="font-size: 15px; color: #98989F; flex-shrink: 0; text-align: right">항상 열림</span></div><div style="display: flex; align-items: center; gap: 14px; min-height: 52px; box-sizing: border-box; padding: 10px 16px; background-image: linear-gradient(rgba(84,84,88,0.55), rgba(84,84,88,0.55)); background-size: calc(100% - 60px) 0.5px; background-position: right bottom; background-repeat: no-repeat"><span aria-hidden="true" style="width: 30px; height: 30px; border-radius: 8px; background: #30A46C; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FFFFFF" d="M6.6 3.2 8.8 3c.6 0 1.1.3 1.3.9l1.1 3c.2.5 0 1.1-.4 1.4L9.3 9.6a11 11 0 0 0 5.1 5.1l1.3-1.5c.4-.4 1-.6 1.4-.4l3 1.1c.6.2.9.7.9 1.3l-.2 2.2c-.1.9-.8 1.6-1.7 1.6A15.6 15.6 0 0 1 5 4.9c0-.9.7-1.6 1.6-1.7z"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1; min-width: 0"><span style="font-size: 17px">전화 · 긴급 통화</span></span><span style="font-size: 15px; color: #98989F; flex-shrink: 0; text-align: right">항상 열림</span></div><sc-for list="{{apps}}" as="a" hint-placeholder-count="2"><div style="display: flex; align-items: center; gap: 14px; min-height: 52px; box-sizing: border-box; padding: 4px 16px; background-image: linear-gradient(rgba(84,84,88,0.55), rgba(84,84,88,0.55)); background-size: calc(100% - 60px) 0.5px; background-position: right bottom; background-repeat: no-repeat"><span aria-hidden="true" style="{{a.tile}}"><span style="font-size: 14px; font-weight: 700; color: #FFFFFF">{{a.letter}}</span></span><span style="font-size: 17px; flex-grow: 1">{{a.name}}</span><button type="button" onClick="{{a.remove}}" aria-label="{{a.aria}}" style="width: 44px; height: 44px; margin-right: -10px; border: none; background: none; display: flex; align-items: center; justify-content: center"><span aria-hidden="true" style="width: 22px; height: 22px; border-radius: 11px; background: #FF453A; display: flex; align-items: center; justify-content: center"><span style="width: 10px; height: 2px; border-radius: 1px; background: #FFFFFF"></span></span></button></div></sc-for><a href="BlockPicker.dc.html" data-row style="display: flex; align-items: center; gap: 14px; min-height: 52px; padding: 10px 16px; box-sizing: border-box; font-size: 17px; color: #FFB547"><span aria-hidden="true" style="width: 30px; height: 30px; border-radius: 8px; background: rgba(255,181,71,0.14); display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>열어 둘 앱 더하기</a></div><span style="font-size: 13px; line-height: 1.45; color: #98989F; padding: 0 16px">여기 없는 앱은 새로 설치한 앱까지 모두 잠겨요. 아이폰은 스크린 타임, 안드로이드는 사용 기록 접근 권한으로 잠가요. 급할 때는 침대 모드의 '긴급 잠금 해제'를 쓰면 돼요.</span></div></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { apps: [true, true, false] };
+  }
+  renderVals() {
+
+    const seg = (labels, sel, pick, dark) => labels.map((label, i) => ({
+      label,
+      on: sel === i ? 'true' : 'false',
+      pick: () => pick(i),
+      style: 'border: none; border-radius: 8px; font-size: 13px; font-weight: 600; color: ' + (dark ? '#1A1205' : '#FFFFFF') + '; transition: background-color 200ms ease; ' +
+        (sel === i ? 'background: ' + (dark ? '#FFFFFF' : '#636366') + '; box-shadow: 0 3px 8px rgba(0,0,0,0.12), 0 3px 1px rgba(0,0,0,0.04)' : 'background: transparent')
+    }));
+    const st = this.state;
+    const all = [['메시지', '메', '#30D158'], ['지도', '지', '#0A84FF'], ['캘린더', '캘', '#FF453A']];
+    const apps = all.filter((_, i) => st.apps[i]).map(([name, letter, col]) => ({
+      name, letter, aria: name + ' 빼기',
+      tile: 'width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: ' + col,
+      remove: () => { const n = st.apps.slice(); n[all.findIndex((a) => a[0] === name)] = false; this.setState({ apps: n }); }
+    }));
+    return {
+      apps, count: 2 + apps.length
+    };
+  }
+}
+</script>
+</body>
+</html>

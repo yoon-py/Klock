@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>리듬 맞춰 말하기</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600&amp;family=IBM+Plex+Sans+KR:wght@300;400;500;600&amp;display=swap">
+<style>
+:root{--ease-out:cubic-bezier(0.23,1,0.32,1);--ease-drawer:cubic-bezier(0.32,0.72,0,1)}
+html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+a,button{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:transform 160ms var(--ease-out),opacity 160ms var(--ease-out),background-color 160ms ease,color 160ms ease}
+a:active,button:active{transform:scale(0.97)}
+[data-row]:active{transform:none;background-color:rgba(255,255,255,0.06)!important}
+[data-plain]:active,[role=switch]:active,nav a:active{transform:none}
+nav a:active{opacity:0.55}
+.sheet{animation:sheet-in 500ms var(--ease-drawer) both}
+@keyframes sheet-in{from{transform:translateY(100%)}}
+@keyframes fade-in{from{opacity:0}}
+@media (prefers-reduced-motion: reduce){.sheet{animation:fade-in 200ms ease both}}
+a:focus-visible,button:focus-visible{outline:2px solid #FF9F0A;outline-offset:2px}
+.spin{animation:spin 900ms linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.eq{animation:eq 520ms ease-in-out infinite alternate;transform-origin:center}@keyframes eq{from{transform:scaleY(0.4)}to{transform:scaleY(1)}}.halo{animation:halo 1.2s ease-out infinite}@keyframes halo{from{transform:scale(0.82);opacity:1}to{transform:scale(1.12);opacity:0.2}}.popin{animation:popin 420ms cubic-bezier(0.34,1.56,0.64,1) both}@keyframes popin{from{transform:scale(0.4);opacity:0}}@media (prefers-reduced-motion: reduce){.spin,.eq,.halo,.popin{animation:none}}</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding-top: 0px; background: radial-gradient(90% 60% at 50% 42%, #2533A8 0%, #1A2380 48%, #121860 100%); color: #FFFFFF; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Apple SD Gothic Neo', 'IBM Plex Sans KR', 'IBM Plex Sans', sans-serif; word-break: keep-all; font-variant-numeric: tabular-nums; position: relative; overflow: hidden; -webkit-font-smoothing: antialiased">
+<div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 54px; padding-top: 6px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; z-index: 30; pointer-events: none; color: #FFFFFF; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'IBM Plex Sans', sans-serif; font-size: 17px; font-weight: 600; letter-spacing: -0.3px;"><span style="width: 132px; text-align: center">7:01</span><span style="position: absolute; top: 11px; left: 50%; width: 126px; height: 37px; margin-left: -63px; border-radius: 20px; background: #000000"></span><span style="width: 132px; display: flex; align-items: center; justify-content: center; gap: 6px"><svg width="18" height="12" viewBox="0 0 18 12" fill="#FFFFFF"><rect x="0" y="8" width="3" height="4" rx="1"></rect><rect x="5" y="5.5" width="3" height="6.5" rx="1"></rect><rect x="10" y="3" width="3" height="9" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></svg><svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"><path d="M1.5 4.4a9.3 9.3 0 0 1 13 0"></path><path d="M4.1 7.1a5.6 5.6 0 0 1 7.8 0"></path><circle cx="8" cy="10" r="1.3" fill="#FFFFFF" stroke="none"></circle></svg><svg width="27" height="13" viewBox="0 0 27 13"><rect x="0.5" y="0.5" width="23" height="12" rx="3.8" fill="none" stroke="#FFFFFF" stroke-opacity="0.4"></rect><rect x="2" y="2" width="17" height="9" rx="2.4" fill="#FFFFFF"></rect><path d="M25 4.6v3.8c.8-.3 1.3-1.1 1.3-1.9s-.5-1.6-1.3-1.9z" fill="#FFFFFF" fill-opacity="0.45"></path></svg></span></div><span aria-hidden="true" style="position: absolute; left: 50%; bottom: 8px; width: 134px; height: 5px; margin-left: -67px; border-radius: 3px; background: #FFFFFF; opacity: 0.85; z-index: 30; pointer-events: none"></span><svg width="390" height="260" viewBox="0 0 390 260" aria-hidden="true" style="position: absolute; top: 120px; left: 0; pointer-events: none"><g stroke="rgba(80,110,225,0.35)" stroke-width="3" stroke-linecap="round"><path d="M0 120L150 98M230 86L390 62M0 140L120 124M260 104L390 86M60 172L190 154M240 146L390 128"></path></g><g fill="rgba(80,110,225,0.6)"><g transform="translate(92 22)"><circle cx="6" cy="22" r="6"></circle><circle cx="24" cy="18" r="6"></circle><path d="M10 22V5l20-4v17h-3V5L13 8v14z"></path></g><g transform="translate(140 28)"><path d="M2 2l8 10-6 4 8 8" fill="none" stroke="rgba(80,110,225,0.6)" stroke-width="3" stroke-linecap="round"></path></g><g transform="translate(160 18)"><circle cx="6" cy="26" r="6"></circle><path d="M10 26V2h3c0 6 8 6 8 12-2-3-5-4-8-4v16z"></path></g><g transform="translate(310 18)"><circle cx="6" cy="22" r="6"></circle><circle cx="24" cy="18" r="6"></circle><path d="M10 22V5l20-4v17h-3V5L13 8v14z"></path></g><g transform="translate(340 60)"><circle cx="6" cy="26" r="6"></circle><path d="M10 26V2h3c0 6 8 6 8 12-2-3-5-4-8-4v16z"></path></g><g transform="translate(16 74) rotate(-18)"><path d="M6 14h8l20-12v36L14 26H6a4 4 0 0 1-4-4v-4a4 4 0 0 1 4-4z"></path><path d="M10 27l4 12h7l-4-12z"></path></g></g><g stroke="rgba(80,110,225,0.6)" stroke-width="3" stroke-linecap="round"><path d="M52 60l8-6M56 76h10M52 92l8 5"></path></g></svg><div style="position: absolute; top: 58px; left: 0; right: 0; height: 56px; padding: 0 8px; display: flex; align-items: center; justify-content: center; z-index: 5"><a href="Alarm.dc.html" aria-label="알람으로 돌아가기" style="position: absolute; left: 8px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center"><svg width="12" height="20" viewBox="0 0 12 20" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2L2 10l8 8"></path></svg></a><span style="font-size: 18px; font-weight: 600">1<span style="color: rgba(255,255,255,0.4)">/1</span></span></div><h1 style="position: absolute; top: 172px; left: 24px; right: 24px; margin: 0; font-size: 31px; font-weight: 700; line-height: 1.4; letter-spacing: -0.5px; text-align: center">{{t1}}<br>{{t2}}</h1><div aria-live="polite" style="position: absolute; top: 312px; left: 0; right: 0; height: 28px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 17px"><sc-if value="{{waiting}}" hint-placeholder-val="{{ true }}"><svg class="spin" width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="8.5" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="3"></circle><path d="M11 2.5a8.5 8.5 0 0 1 8.5 8.5" fill="none" stroke="#3BC4E8" stroke-width="3" stroke-linecap="round"></path></svg><span style="color: rgba(255,255,255,0.55)">시작 전..</span></sc-if><sc-if value="{{listening}}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="display: flex; align-items: center; gap: 2px; height: 20px"><span class="eq" style="width: 3px; height: 8px; border-radius: 2px; background: #3BC4E8; animation-delay: 0ms"></span><span class="eq" style="width: 3px; height: 16px; border-radius: 2px; background: #3BC4E8; animation-delay: 120ms"></span><span class="eq" style="width: 3px; height: 20px; border-radius: 2px; background: #3BC4E8; animation-delay: 240ms"></span><span class="eq" style="width: 3px; height: 12px; border-radius: 2px; background: #3BC4E8; animation-delay: 360ms"></span><span class="eq" style="width: 3px; height: 18px; border-radius: 2px; background: #3BC4E8; animation-delay: 80ms"></span><span class="eq" style="width: 3px; height: 9px; border-radius: 2px; background: #3BC4E8; animation-delay: 200ms"></span></span><span style="color: #3BC4E8; font-weight: 600">듣고 있어요</span></sc-if></div><sc-if value="{{intro}}" hint-placeholder-val="{{ true }}"><div style="position: absolute; top: 420px; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; gap: 40px"><span aria-hidden="true" style="font-size: 96px; line-height: 1">{{emoji}}</span><span style="font-size: 36px; font-weight: 700; letter-spacing: -0.5px">{{word}}</span></div></sc-if><sc-if value="{{grid}}" hint-placeholder-val="{{ false }}"><div style="position: absolute; top: 372px; left: 0; right: 0; height: 180px"><sc-for list="{{tiles}}" as="o" hint-placeholder-count="8"><span style="{{o.style}}">{{o.label}}</span></sc-for></div></sc-if><sc-if value="{{counting}}" hint-placeholder-val="{{ false }}"><span aria-live="assertive" style="position: absolute; top: 360px; left: 0; right: 0; height: 200px; display: flex; align-items: center; justify-content: center; font-size: 168px; font-weight: 900; line-height: 1; color: #FFD43B; -webkit-text-stroke: 7px #6B2E0A; paint-order: stroke fill; text-shadow: 0 8px 0 #4A1F07; font-family: 'Arial Rounded MT Bold', 'SF Pro Rounded', -apple-system, sans-serif">{{cd}}</span></sc-if><sc-if value="{{listening}}" hint-placeholder-val="{{ false }}"><div aria-label="듣는 중" role="img" style="position: absolute; top: 650px; left: 50%; width: 132px; height: 132px; margin-left: -66px; display: flex; align-items: center; justify-content: center"><span class="halo" aria-hidden="true" style="position: absolute; inset: 0; border-radius: 50%; background: rgba(255,106,43,0.35)"></span><span style="position: relative; width: 104px; height: 104px; border-radius: 52px; background: #FF6A2B; display: flex; align-items: center; justify-content: center"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="#FFFFFF" stroke="none"></rect><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"></path></svg></span></div></sc-if><sc-if value="{{done}}" hint-placeholder-val="{{ false }}"><a href="WakeDone.dc.html" aria-label="알람 해제, 다음으로" class="popin" style="position: absolute; top: 410px; left: 50%; width: 110px; height: 110px; margin-left: -55px; border-radius: 55px; background: linear-gradient(145deg, #86E02A 0%, #2DB411 100%); display: flex; align-items: center; justify-content: center"><svg width="54" height="54" viewBox="0 0 54 54" fill="none" stroke="#EEFBE6" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 28l11 10 23-25"></path></svg></a></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { t: 0 };
+    // 시작 전 → 3·2·1 → 말하기 → 해제를 15초마다 되풀이해요 (실제 앱은 해제 뒤 다음 화면으로 넘어가요)
+    this.timer = setInterval(() => this.setState({ t: (this.state.t + 100) % 15000 }), 100);
+  }
+  renderVals() {
+
+    const t = this.state.t;
+    const WORDS = ["일어나자", "힘을내자"], EMOJI = ["\u23f0", "\ud83d\udcaa"], CH = ["일", "어", "나", "자", "힘", "을", "내", "자"];
+    const intro = t < 3600, fill = t >= 3600 && t < 4400, counting = t >= 4400 && t < 7400, speak = t >= 7400 && t < 12600, done = t >= 12600;
+    const shown = fill ? Math.floor((t - 3600) / 100) + 1 : (intro ? 0 : 8);
+    const cur = speak ? Math.floor((t - 7400) / 650) : -1;
+    const tiles = CH.map((ch, i) => {
+      const r = Math.floor(i / 4), c = i % 4, on = i < shown;
+      const st = i === cur ? 'background: #E9EDF7; color: #2A2A2E; box-shadow: 0 0 0 4px #F2C744, 0 0 22px rgba(242,199,68,0.55); transform: scale(1.03)'
+        : i === cur - 1 ? 'background: rgba(150,170,235,0.45); color: rgba(255,255,255,0.8); box-shadow: 0 0 0 3px rgba(200,210,245,0.35)'
+        : 'background: rgba(95,125,235,0.38); color: #FFFFFF';
+      return { label: ch, style: 'position: absolute; left: ' + (12 + c * (84 + 10)) + 'px; top: ' + (r * (84 + 12)) + 'px; width: 84px; height: 84px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 700; transition: transform 200ms ease, background-color 200ms ease, box-shadow 200ms ease, opacity 200ms ease; ' + st + '; opacity: ' + (on ? 1 : 0) + (on ? '' : '; transform: scale(0.8)') };
+    });
+    const wi = t < 1800 ? 0 : 1;
+    return {
+      t1: speak ? '지금이에요!' : '리듬 맞춰 말하고', t2: speak ? '리듬에 맞춰 말해요' : '알람 해제',
+      waiting: t < 7400,
+      listening: speak, intro, grid: !intro && !done, counting, done,
+      emoji: EMOJI[wi], word: WORDS[wi], cd: String(3 - Math.floor((t - 4400) / 1000)), tiles
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>미션 문장 고르기</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600&amp;family=IBM+Plex+Sans+KR:wght@300;400;500;600&amp;display=swap">
+<style>
+:root{--ease-out:cubic-bezier(0.23,1,0.32,1);--ease-drawer:cubic-bezier(0.32,0.72,0,1)}
+html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+a,button{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:transform 160ms var(--ease-out),opacity 160ms var(--ease-out),background-color 160ms ease,color 160ms ease}
+a:active,button:active{transform:scale(0.97)}
+[data-row]:active{transform:none;background-color:rgba(255,255,255,0.06)!important}
+[data-plain]:active,[role=switch]:active,nav a:active{transform:none}
+nav a:active{opacity:0.55}
+.sheet{animation:sheet-in 500ms var(--ease-drawer) both}
+@keyframes sheet-in{from{transform:translateY(100%)}}
+@keyframes fade-in{from{opacity:0}}
+@media (prefers-reduced-motion: reduce){.sheet{animation:fade-in 200ms ease both}}
+a:focus-visible,button:focus-visible{outline:2px solid #FF9F0A;outline-offset:2px}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding-top: 0px; background: #1C1C1E; color: #FFFFFF; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Apple SD Gothic Neo', 'IBM Plex Sans KR', 'IBM Plex Sans', sans-serif; word-break: keep-all; font-variant-numeric: tabular-nums; position: relative; overflow: hidden; -webkit-font-smoothing: antialiased">
+<div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 54px; padding-top: 6px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; z-index: 30; pointer-events: none; color: #FFFFFF; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'IBM Plex Sans', sans-serif; font-size: 17px; font-weight: 600; letter-spacing: -0.3px;"><span style="width: 132px; text-align: center">12:02</span><span style="position: absolute; top: 11px; left: 50%; width: 126px; height: 37px; margin-left: -63px; border-radius: 20px; background: #000000"></span><span style="width: 132px; display: flex; align-items: center; justify-content: center; gap: 6px"><svg width="18" height="12" viewBox="0 0 18 12" fill="#FFFFFF"><rect x="0" y="8" width="3" height="4" rx="1"></rect><rect x="5" y="5.5" width="3" height="6.5" rx="1"></rect><rect x="10" y="3" width="3" height="9" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></svg><svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"><path d="M1.5 4.4a9.3 9.3 0 0 1 13 0"></path><path d="M4.1 7.1a5.6 5.6 0 0 1 7.8 0"></path><circle cx="8" cy="10" r="1.3" fill="#FFFFFF" stroke="none"></circle></svg><svg width="27" height="13" viewBox="0 0 27 13"><rect x="0.5" y="0.5" width="23" height="12" rx="3.8" fill="none" stroke="#FFFFFF" stroke-opacity="0.4"></rect><rect x="2" y="2" width="17" height="9" rx="2.4" fill="#FFFFFF"></rect><path d="M25 4.6v3.8c.8-.3 1.3-1.1 1.3-1.9s-.5-1.6-1.3-1.9z" fill="#FFFFFF" fill-opacity="0.45"></path></svg></span></div><span aria-hidden="true" style="position: absolute; left: 50%; bottom: 8px; width: 134px; height: 5px; margin-left: -67px; border-radius: 3px; background: #FFFFFF; opacity: 0.85; z-index: 30; pointer-events: none"></span><div style="position: absolute; top: 54px; left: 0; right: 0; height: 52px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between"><a href="MissionRhythmSet.dc.html" style="height: 44px; padding: 0 8px; display: flex; align-items: center; font-size: 17px">취소</a><span style="font-size: 17px; font-weight: 600">미션 문장 고르기</span><a href="MissionRhythmSet.dc.html" style="height: 44px; padding: 0 8px; display: flex; align-items: center; font-size: 17px; font-weight: 600; color: {{saveC}}" aria-disabled="{{noneOn}}">저장</a></div><div style="position: absolute; top: 122px; left: 0; right: 0; display: flex; flex-direction: column"><button type="button" role="checkbox" aria-checked="{{allOn}}" onClick="{{allTap}}" style="height: 54px; padding: 0 24px; border: none; background: none; color: #FFFFFF; display: flex; align-items: center; gap: 18px; font-size: 17px; text-align: left"><span style="{{allBox}}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{allChk}}"><path d="M3.2 8.4l3 3 6.6-7"></path></svg></span>전체 선택</button><button type="button" role="checkbox" aria-checked="{{r0On}}" onClick="{{r0Tap}}" style="height: 54px; padding: 0 24px; border: none; background: none; color: #FFFFFF; display: flex; align-items: center; gap: 18px; font-size: 17px; text-align: left"><span style="{{r0Box}}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{r0Chk}}"><path d="M3.2 8.4l3 3 6.6-7"></path></svg></span>일어나자 힘을내자</button><button type="button" role="checkbox" aria-checked="{{r1On}}" onClick="{{r1Tap}}" style="height: 54px; padding: 0 24px; border: none; background: none; color: #FFFFFF; display: flex; align-items: center; gap: 18px; font-size: 17px; text-align: left"><span style="{{r1Box}}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{r1Chk}}"><path d="M3.2 8.4l3 3 6.6-7"></path></svg></span>눈을뜨자 일어나자</button><button type="button" role="checkbox" aria-checked="{{r2On}}" onClick="{{r2Tap}}" style="height: 54px; padding: 0 24px; border: none; background: none; color: #FFFFFF; display: flex; align-items: center; gap: 18px; font-size: 17px; text-align: left"><span style="{{r2Box}}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{r2Chk}}"><path d="M3.2 8.4l3 3 6.6-7"></path></svg></span>아침이다 일어나자</button><button type="button" role="checkbox" aria-checked="{{r3On}}" onClick="{{r3Tap}}" style="height: 54px; padding: 0 24px; border: none; background: none; color: #FFFFFF; display: flex; align-items: center; gap: 18px; font-size: 17px; text-align: left"><span style="{{r3Box}}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{r3Chk}}"><path d="M3.2 8.4l3 3 6.6-7"></path></svg></span>지각금지 일어나자</button><button type="button" role="checkbox" aria-checked="{{r4On}}" onClick="{{r4Tap}}" style="height: 54px; padding: 0 24px; border: none; background: none; color: #FFFFFF; display: flex; align-items: center; gap: 18px; font-size: 17px; text-align: left"><span style="{{r4Box}}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{r4Chk}}"><path d="M3.2 8.4l3 3 6.6-7"></path></svg></span>할수있다 해낼거야</button><button type="button" role="checkbox" aria-checked="{{r5On}}" onClick="{{r5Tap}}" style="height: 54px; padding: 0 24px; border: none; background: none; color: #FFFFFF; display: flex; align-items: center; gap: 18px; font-size: 17px; text-align: left"><span style="{{r5Box}}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{r5Chk}}"><path d="M3.2 8.4l3 3 6.6-7"></path></svg></span>물한잔을 마셔보자</button><button type="button" role="checkbox" aria-checked="{{r6On}}" onClick="{{r6Tap}}" style="height: 54px; padding: 0 24px; border: none; background: none; color: #FFFFFF; display: flex; align-items: center; gap: 18px; font-size: 17px; text-align: left"><span style="{{r6Box}}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{r6Chk}}"><path d="M3.2 8.4l3 3 6.6-7"></path></svg></span>기지개를 쭉켜보자</button><button type="button" role="checkbox" aria-checked="{{r7On}}" onClick="{{r7Tap}}" style="height: 54px; padding: 0 24px; border: none; background: none; color: #FFFFFF; display: flex; align-items: center; gap: 18px; font-size: 17px; text-align: left"><span style="{{r7Box}}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{r7Chk}}"><path d="M3.2 8.4l3 3 6.6-7"></path></svg></span>오늘하루 화이팅해</button><button type="button" role="checkbox" aria-checked="{{r8On}}" onClick="{{r8Tap}}" style="height: 54px; padding: 0 24px; border: none; background: none; color: #FFFFFF; display: flex; align-items: center; gap: 18px; font-size: 17px; text-align: left"><span style="{{r8Box}}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{r8Chk}}"><path d="M3.2 8.4l3 3 6.6-7"></path></svg></span>일어나서 운동하자</button><button type="button" role="checkbox" aria-checked="{{r9On}}" onClick="{{r9Tap}}" style="height: 54px; padding: 0 24px; border: none; background: none; color: #FFFFFF; display: flex; align-items: center; gap: 18px; font-size: 17px; text-align: left"><span style="{{r9Box}}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{r9Chk}}"><path d="M3.2 8.4l3 3 6.6-7"></path></svg></span>이불밖은 안전해요</button></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { sel: [true, true, true, true, true, true, true, true, true, false] };
+  }
+  renderVals() {
+
+    const sel = this.state.sel, out = {};
+    const box = (on) => 'width: 26px; height: 26px; box-sizing: border-box; border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: background-color 160ms ease; ' + (on ? 'background: #FF9F0A; border: none' : 'background: none; border: 2px solid #636366');
+    const all = sel.every(Boolean), none = !sel.some(Boolean);
+    sel.forEach((on, i) => {
+      out['r' + i + 'On'] = on ? 'true' : 'false';
+      out['r' + i + 'Box'] = box(on);
+      out['r' + i + 'Chk'] = 'opacity: ' + (on ? 1 : 0);
+      out['r' + i + 'Tap'] = () => { const n = sel.slice(); n[i] = !n[i]; this.setState({ sel: n }); };
+    });
+    out.allOn = all ? 'true' : 'false'; out.allBox = box(all); out.allChk = 'opacity: ' + (all ? 1 : 0);
+    out.allTap = () => this.setState({ sel: sel.map(() => !all) });
+    out.noneOn = none ? 'true' : 'false';
+    out.saveC = none ? '#636366' : '#FFFFFF';
+    return out;
+  }
+}
+</script>
+</body>
+</html>

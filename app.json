@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Slipper",
+    "slug": "slipper",
+    "scheme": "slipper",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/placeholder/icon.png",
+    "userInterfaceStyle": "dark",
+    "ios": {
+      "bundleIdentifier": "com.slipper.app",
+      "deploymentTarget": "26.0",
+      "supportsTablet": false
+    },
+    "plugins": [
+      "expo-router",
+      "expo-sqlite",
+      "@react-native-community/datetimepicker",
+      "expo-font",
+      "expo-status-bar",
+      "expo-audio"
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "a4131e87-d3f6-41fb-be0d-20e7324e9e5a"
+      }
+    },
+    "owner": "kimyoonhwan"
+  }
+}
