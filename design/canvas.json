@@ -111,20 +111,20 @@
       "is_interactive": true
     },
     "SleepTab.dc.html": {
-      "x": 470,
-      "y": 2994,
+      "x": 1880,
+      "y": -6000,
       "w": 390,
       "h": 844,
-      "title": "1-1. 수면 탭 · 기상 시간 고르고 수면 시작 (상태 1)",
+      "title": "v2-4. 수면 탭 · 밤하늘 홈",
       "radius": 44,
       "is_interactive": true
     },
     "SleepPhoneTip.dc.html": {
-      "x": 940,
-      "y": 2994,
+      "x": 2350,
+      "y": -6000,
       "w": 390,
       "h": 844,
-      "title": "1-2. 수면 시작 · 폰 두는 곳 안내",
+      "title": "v2-5. 수면 시작 전 · 폰 두는 곳",
       "radius": 44,
       "is_interactive": true
     },
@@ -174,20 +174,20 @@
       "is_interactive": true
     },
     "NightSound.dc.html": {
-      "x": 3760,
-      "y": 2994,
+      "x": 3290,
+      "y": -6000,
       "w": 390,
       "h": 844,
-      "title": "4. 수면 중 · 소리 재생 (상태 4)",
+      "title": "v2-7. 수면 중 · 소리 재생 (배경 = 장면 영상)",
       "radius": 44,
       "is_interactive": true
     },
     "NightSession.dc.html": {
-      "x": 4230,
-      "y": 2994,
+      "x": 3760,
+      "y": -6000,
       "w": 390,
       "h": 844,
-      "title": "4-1. 수면 중 · 소리 꺼진 뒤 코골이 녹음",
+      "title": "v2-8. 수면 중 · 녹음",
       "radius": 44,
       "is_interactive": true
     },
@@ -267,7 +267,7 @@
       "x": 470,
       "y": 5522,
       "w": 390,
-      "h": 1310,
+      "h": 1380,
       "title": "8-0. 수면 | 기상 변경",
       "radius": 44,
       "is_interactive": true
@@ -471,11 +471,11 @@
       "is_interactive": true
     },
     "Records.dc.html": {
-      "x": 0,
-      "y": 8516,
+      "x": 2820,
+      "y": -4900,
       "w": 390,
-      "h": 1110,
-      "title": "9. 리포트 탭 · 핵심만",
+      "h": 2160,
+      "title": "v2-15. 리포트",
       "radius": 44,
       "is_interactive": true
     },
@@ -485,6 +485,114 @@
       "w": 390,
       "h": 844,
       "title": "9-1. 다른 날짜 보기",
+      "radius": 44,
+      "is_interactive": true
+    },
+    "GuideBreath.dc.html": {
+      "x": 470,
+      "y": -4900,
+      "w": 390,
+      "h": 844,
+      "title": "v2-11. 호흡 가이드 (4-7-8)",
+      "radius": 44,
+      "is_interactive": true
+    },
+    "GuideVoice.dc.html": {
+      "x": 940,
+      "y": -4900,
+      "w": 390,
+      "h": 844,
+      "title": "v2-12. 몸 풀기 · 음성",
+      "radius": 44,
+      "is_interactive": true
+    },
+    "Intro.dc.html": {
+      "x": 0,
+      "y": -6000,
+      "w": 390,
+      "h": 844,
+      "title": "v2-0. 처음 열 때 · 소개 5장 (자동 재생)",
+      "radius": 44,
+      "is_interactive": true
+    },
+    "OnboardAsk.dc.html": {
+      "x": 470,
+      "y": -6000,
+      "w": 390,
+      "h": 844,
+      "title": "v2-1. 질문 3개",
+      "radius": 44,
+      "is_interactive": true
+    },
+    "OnboardPlan.dc.html": {
+      "x": 940,
+      "y": -6000,
+      "w": 390,
+      "h": 844,
+      "title": "v2-2. 내 수면 계획",
+      "radius": 44,
+      "is_interactive": true
+    },
+    "OnboardPermit.dc.html": {
+      "x": 1410,
+      "y": -6000,
+      "w": 390,
+      "h": 844,
+      "title": "v2-3. 권한",
+      "radius": 44,
+      "is_interactive": true
+    },
+    "SleepTags.dc.html": {
+      "x": 2820,
+      "y": -6000,
+      "w": 390,
+      "h": 844,
+      "title": "v2-6. 수면 시작 전 · 오늘 밤 태그",
+      "radius": 44,
+      "is_interactive": true
+    },
+    "Mixer.dc.html": {
+      "x": 0,
+      "y": -4900,
+      "w": 390,
+      "h": 844,
+      "title": "v2-10. 믹서",
+      "radius": 44,
+      "is_interactive": true
+    },
+    "Routine.dc.html": {
+      "x": 1410,
+      "y": -4900,
+      "w": 390,
+      "h": 844,
+      "title": "v2-13. 잠들기 전 루틴",
+      "radius": 44,
+      "is_interactive": true
+    },
+    "RoutineRun.dc.html": {
+      "x": 1880,
+      "y": -4900,
+      "w": 390,
+      "h": 844,
+      "title": "v2-14. 루틴 실행",
+      "radius": 44,
+      "is_interactive": true
+    },
+    "Explore.dc.html": {
+      "x": 2350,
+      "y": -4900,
+      "w": 390,
+      "h": 1660,
+      "title": "v2-9. 탐색 탭 · 사운드와 가이드",
+      "radius": 44,
+      "is_interactive": true
+    },
+    "RecordsEmpty.dc.html": {
+      "x": 3290,
+      "y": -4900,
+      "w": 390,
+      "h": 2160,
+      "title": "v2-16. 리포트 · 기록 없을 때",
       "radius": 44,
       "is_interactive": true
     }
@@ -601,10 +709,57 @@
       "y": 8516,
       "w": 320,
       "fill": "teal",
-      "text": "리포트는 폰으로 정확히 남는 것만 보여 줘요. 수면 점수, 수면 단계(깊은 잠·렘), 하루 타임라인, 잠긴 앱 연 횟수는 뺐어요. 폰 마이크와 움직임만으로는 잠의 깊이를 믿을 만하게 잴 수 없어서, 점수로 보여 주면 정확한 척하게 돼요.\n\n다른 앱 참고: Sleep Cycle은 점수와 수면 단계를 보여 주지만 정확도는 밝히지 않아요. Rise는 점수와 단계를 빼고 '목표보다 얼마나 덜 잤나(수면 부채)'를 핵심으로 보여 줘요. 알라미 같은 앱은 코골이 녹음을 내세워요.\n\n9 리포트 탭은 네 가지예요.\n잔 시간: '수면 시작'을 누른 때부터 알람까지. 그날 알람의 목표와 비교해요.\n이번 주: 하루하루 잔 시간 막대와 목표선(평일·주말 목표가 달라요).\n일어나기: 알람이 울린 뒤 미션을 끝내기까지 걸린 시간. Slipper만 잴 수 있어요.\n밤사이 소리: 코골이·잠꼬대가 들린 부분만 녹음. 눌러서 들어요. 폰에만 7일 보관해요.\n\n지난 날짜는 '오늘' 칩을 눌러 9-1에서 골라요."
+      "text": "리포트는 점수 없이, 출처를 밝힌 기록만 보여 줘요(2026-10-21 변경: 수면 단계 추가).\n\n잔 시간: 잠든 시각부터 깬 시각까지에서 중간에 깬 시간을 뺀 '실제로 잔 시간'. 단계 기록이 없으면 '수면 시작 → 알람' 길이.\n수면 단계: 애플워치 기록이 있으면 그걸 쓰고(렘까지), 없으면 폰의 움직임과 소리로 추정해요(깸·얕은 잠·깊은 잠). 오른쪽 위에 '애플워치 기록' 또는 '폰으로 추정'을 항상 써요. 그래프 위 점은 밤사이 소리가 들린 때예요.\n이번 주: 실제로 잔 시간 막대와 목표선.\n일어나기: 알람에서 미션 완료까지. Slipper만 잴 수 있어요.\n밤사이 소리: 코골이·잠꼬대·기침·놀란 소리. 들린 부분만 녹음하고 폰에만 7일 보관해요. '놀란 소리'를 '악몽'이라고 부르지 않아요.\n이번 주 습관: 기록에서 바로 계산되는 문장만. 원인 추측이나 건강 조언은 하지 않아요.\n\n지난 날짜는 '오늘' 칩을 눌러 9-1에서 골라요."
+    },
+    "row6": {
+      "kind": "title1",
+      "text": "수면 가이드 · 2026-10-21 추가",
+      "x": 0,
+      "y": 10636,
+      "maxW": 1400,
+      "w": 240
+    },
+    "guidenote": {
+      "x": 1410,
+      "y": 10936,
+      "w": 320,
+      "fill": "blue",
+      "text": "수면 탭과 침대 모드의 '수면 가이드' 줄에서 열어요. 누운 채로 따라 하는 짧은 가이드 3개예요.\n\n4-7-8 호흡: 4초 들이쉬고 7초 참고 8초 내쉬기를 4번. 원이 커졌다 작아지고, 단계가 바뀔 때 폰이 살짝 울려요. 이 화면은 실제처럼 76초 뒤 끝 화면('잘하셨어요', 수면 시작)이 나와요.\n1분 호흡: 같은 화면, 4초 들이쉬기와 6초 내쉬기를 6번.\n몸 풀기: 약 5분 음성. 목소리는 OpenAI 음성(여자 목소리 marin)으로 미리 만들어 앱에 넣어 둬서 인터넷이 필요 없어요. OpenAI 정책상 'AI가 만든 목소리예요'를 꼭 보여 줘요. '끝나면 바로 수면 시작'이 켜져 있으면 음성이 끝나고 3초 뒤 저절로 수면이 시작돼요.\n\n가이드 중에는 수면 사운드를 틀지 않아요. 수면 시작을 누르면 그때부터 소리가 나와요."
+    },
+    "rowv2": {
+      "kind": "title1",
+      "text": "v2 · 2026-10-22 새 아트 디렉션 \"밤에서 새벽으로\" (이 줄이 기준)",
+      "x": 0,
+      "y": -6300,
+      "maxW": 4300,
+      "w": 240
+    },
+    "v2note": {
+      "x": 4300,
+      "y": -6000,
+      "w": 340,
+      "fill": "purple",
+      "text": "SPEC.md 2-1장 아트 디렉션으로 다시 그린 화면이에요. 그림은 모두 앱 안에서 벡터로 그리고(슬리퍼, 밤하늘, 실제 달 모양, 산 능선, 침대·폰, 루틴 아이콘), 움직임은 앱에서 Reanimated로 만들어요.\n\n장면 카드·수면 중 배경의 움직이는 그림은 실제 앱에서 장면 영상(Pexels)이 들어갈 자리예요.\n\n아래쪽 예전 줄에서 같은 이름 화면은 이 줄로 옮겼어요. 알람 탭·미션·앱 잠금 같은 예전 화면은 구조만 따르고, 색·카드·그림은 이 줄에 맞춰 만들어요(SPEC 13장).\n\n쓰지 않는 화면: Login, Tour*(16단계 튜토리얼), SoundSheet, MissionSquatGrip/Elbow/Count."
     }
   },
   "order": [
+    "Intro.dc.html",
+    "OnboardAsk.dc.html",
+    "OnboardPlan.dc.html",
+    "OnboardPermit.dc.html",
+    "SleepTab.dc.html",
+    "SleepPhoneTip.dc.html",
+    "SleepTags.dc.html",
+    "NightSound.dc.html",
+    "NightSession.dc.html",
+    "Mixer.dc.html",
+    "GuideBreath.dc.html",
+    "GuideVoice.dc.html",
+    "Routine.dc.html",
+    "RoutineRun.dc.html",
+    "Explore.dc.html",
+    "Records.dc.html",
+    "RecordsEmpty.dc.html",
     "Main.dc.html",
     "Login.dc.html",
     "TourPlan.dc.html",
@@ -617,15 +772,11 @@
     "TourReport.dc.html",
     "HintBlock.dc.html",
     "HintSound.dc.html",
-    "SleepTab.dc.html",
-    "SleepPhoneTip.dc.html",
     "WindDown.dc.html",
     "LockShield.dc.html",
     "Bed.dc.html",
     "SoundSheet.dc.html",
     "EmergencyUnlock.dc.html",
-    "NightSound.dc.html",
-    "NightSession.dc.html",
     "Alarm.dc.html",
     "MissionSquat.dc.html",
     "MissionSquatGrip.dc.html",
@@ -657,7 +808,6 @@
     "MissionScan.dc.html",
     "MissionVoice.dc.html",
     "MissionRhythm.dc.html",
-    "Records.dc.html",
     "RecordsDateSheet.dc.html"
   ],
   "pages": [],

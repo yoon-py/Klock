@@ -10,6 +10,7 @@ import { useSetting } from '../../src/store';
 import { startPlanDraft } from '../../src/store/draft';
 import { nextWake, setNextWake, useNight, wakeMin } from '../../src/store/night';
 import { missionSummary } from '../../src/missions';
+import { soundLine } from '../../src/scenes';
 import { durKo, fmtKo, toMin } from '../../src/time';
 import { color } from '../../src/theme';
 
@@ -17,6 +18,7 @@ export default function SleepTab() {
   const [schedule] = useSetting('schedule');
   useSetting('wakeOnce'); // 다이얼로 바꾸면 다시 그려요
   const [seen] = useSetting('seen');
+  const [sleepSound] = useSetting('sleepSound');
   const night = useNight();
   const inset = useSafeAreaInsets();
   const [now, setNow] = useState(new Date());
@@ -58,6 +60,7 @@ export default function SleepTab() {
             <View style={st.facts}>
               <Fact k="미션" v={missionSummary(schedule.missions)} onPress={openPlan} />
               <Fact k="앱 잠금" v={`${fmtKo(toMin(schedule.bedtime) - schedule.lock.leadMinutes)}부터`} onPress={openPlan} />
+              <Fact k="사운드" v={soundLine(sleepSound.scenes)} onPress={() => router.navigate('/explore')} />
             </View>
           </>
         ) : (

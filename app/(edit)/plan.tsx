@@ -1,6 +1,7 @@
 // 수면 | 기상 변경 (SPEC 6.3, 디자인 PlanEdit)
 import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler'; // 링이 손가락을 잡으면 스크롤이 양보하게
 import { router } from 'expo-router';
 import { SymbolView } from 'expo-symbols';
 import { SleepRing, GOAL_MIN } from '../../src/components/SleepRing';

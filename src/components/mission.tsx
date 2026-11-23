@@ -48,7 +48,7 @@ export function MissionTop({ progressKey }: { progressKey: unknown }) {
 }
 
 /** 원형 5초 카운트다운 + "자리에서 일어나 준비하세요" + 바로 시작 */
-export function Prepare({ onDone }: { onDone: () => void }) {
+export function Prepare({ onDone, title = '자리에서 일어나\n준비하세요' }: { onDone: () => void; title?: string }) {
   const [sec, setSec] = useState(5);
   useEffect(() => {
     if (sec === 0) return onDone();
@@ -60,7 +60,7 @@ export function Prepare({ onDone }: { onDone: () => void }) {
       <View accessibilityLabel={`${sec}초 뒤 시작`} style={st.ring}>
         <Text style={{ fontSize: 24, fontWeight: '700', color: '#FFF' }}>{sec}</Text>
       </View>
-      <Text style={st.h1}>{'자리에서 일어나\n준비하세요'}</Text>
+      <Text style={st.h1}>{title}</Text>
       <Pressable onPress={onDone} style={st.start}>
         <Text style={{ fontSize: 17, fontWeight: '600', color: '#000' }}>바로 시작</Text>
       </Pressable>

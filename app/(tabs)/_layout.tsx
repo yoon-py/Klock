@@ -13,6 +13,10 @@ export default function TabsLayout() {
         <NativeTabs.Trigger.Icon sf="moon.fill" md="bedtime" />
         <NativeTabs.Trigger.Label>수면</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="explore">
+        <NativeTabs.Trigger.Icon sf="sparkles" md="explore" />
+        <NativeTabs.Trigger.Label>탐색</NativeTabs.Trigger.Label>
+      </NativeTabs.Trigger>
       <NativeTabs.Trigger name="report">
         <NativeTabs.Trigger.Icon sf="chart.bar.fill" md="bar_chart" />
         <NativeTabs.Trigger.Label>리포트</NativeTabs.Trigger.Label>

@@ -1,6 +1,7 @@
 // 24시간 링 (SPEC 6.3, 디자인 PlanEdit). 침대·알람 끝을 끌면 늘이고 줄이고, 가운데를 끌면 옮겨요.
-import { useRef } from 'react';
-import { PanResponder, View } from 'react-native';
+import { useMemo, useRef } from 'react';
+import { View } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Svg, { Circle, Line, Path, Text as SvgText } from 'react-native-svg';
 import { SymbolView } from 'expo-symbols';
 import * as Haptics from 'expo-haptics';
@@ -44,41 +45,47 @@ export function SleepRing({ bed, wake, onChange, onDrag }: { bed: number; wake: 
     state.current.onChange(b, w);
   };
 
-  const pan = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: (e) => {
-        const p = angleAt(e.nativeEvent.locationX, e.nativeEvent.locationY);
-        if (p.d < 96 || p.d > 166) return false;
-        const { bed: b, wake: w } = state.current;
-        const gap = (a: number, c: number) => Math.min(mod(a - c, 1440), mod(c - a, 1440));
-        const nb = gap(p.m, b), nw = gap(p.m, w);
-        let mode: 'bed' | 'wake' | 'all' | null = null;
-        if (Math.min(nb, nw) <= 40) mode = nb <= nw ? 'bed' : 'wake';
-        else if (mod(p.m - b, 1440) <= mod(w - b, 1440)) mode = 'all';
-        if (!mode) return false;
-        drag.current = { mode, b0: b, w0: w, prev: p.m, acc: 0 };
-        state.current.onDrag?.(true);
-        return true;
-      },
-      onPanResponderTerminationRequest: () => false,
-      onPanResponderMove: (e) => {
-        const g = drag.current;
-        if (!g) return;
-        const q = angleAt(e.nativeEvent.locationX, e.nativeEvent.locationY);
-        let dm = q.m - g.prev;
-        if (dm > 720) dm -= 1440;
-        if (dm < -720) dm += 1440;
-        g.prev = q.m;
-        g.acc += dm;
-        const d0 = mod(g.w0 - g.b0, 1440);
-        if (g.mode === 'bed') set(g.w0 - clampD(d0 - snap(g.acc)), g.w0);
-        else if (g.mode === 'wake') set(g.b0, g.b0 + clampD(d0 + snap(g.acc)));
-        else set(snap(g.b0 + g.acc), snap(g.b0 + g.acc) + d0);
-      },
-      onPanResponderRelease: () => { drag.current = null; state.current.onDrag?.(false); },
-      onPanResponderTerminate: () => { drag.current = null; state.current.onDrag?.(false); },
-    }),
-  ).current;
+  const begin = (x: number, y: number) => {
+    const p = angleAt(x, y);
+    if (p.d < 96 || p.d > 166) return false;
+    const { bed: b, wake: w } = state.current;
+    const gap = (a: number, c: number) => Math.min(mod(a - c, 1440), mod(c - a, 1440));
+    const nb = gap(p.m, b), nw = gap(p.m, w);
+    let mode: 'bed' | 'wake' | 'all' | null = null;
+    if (Math.min(nb, nw) <= 40) mode = nb <= nw ? 'bed' : 'wake';
+    else if (mod(p.m - b, 1440) <= mod(w - b, 1440)) mode = 'all';
+    if (!mode) return false;
+    drag.current = { mode, b0: b, w0: w, prev: p.m, acc: 0 };
+    state.current.onDrag?.(true);
+    return true;
+  };
+  const move = (x: number, y: number) => {
+    const g = drag.current;
+    if (!g) return;
+    const q = angleAt(x, y);
+    let dm = q.m - g.prev;
+    if (dm > 720) dm -= 1440;
+    if (dm < -720) dm += 1440;
+    g.prev = q.m;
+    g.acc += dm;
+    const d0 = mod(g.w0 - g.b0, 1440);
+    if (g.mode === 'bed') set(g.w0 - clampD(d0 - snap(g.acc)), g.w0);
+    else if (g.mode === 'wake') set(g.b0, g.b0 + clampD(d0 + snap(g.acc)));
+    else set(snap(g.b0 + g.acc), snap(g.b0 + g.acc) + d0);
+  };
+  const end = () => { drag.current = null; state.current.onDrag?.(false); };
+
+  // 링을 누르는 순간 바로 잡아요. 늦게 잡으면 위아래로 끌 때 바깥 스크롤이 손가락을 가져가요.
+  const pan = useMemo(() => Gesture.Pan()
+    .runOnJS(true)
+    .manualActivation(true)
+    .onTouchesDown((e, mgr) => {
+      const t = e.allTouches[0];
+      if (t && begin(t.x, t.y)) mgr.activate();
+      else mgr.fail();
+    })
+    .onUpdate((e) => move(e.x, e.y))
+    .onFinalize(end), []); // 안에서 ref만 읽어서 한 번만 만들어요
 
   const dur = mod(wake - bed, 1440), ok = dur >= GOAL_MIN;
   const tone = ok ? color.goal : '#636366';
@@ -87,7 +94,8 @@ export function SleepRing({ bed, wake, onChange, onDrag }: { bed: number; wake: 
   const iconTint = ok ? '#4D3F00' : '#E5E5EA';
 
   return (
-    <View style={{ width: SIZE, height: SIZE, alignSelf: 'center' }} {...pan.panHandlers}>
+    <GestureDetector gesture={pan}>
+    <View style={{ width: SIZE, height: SIZE, alignSelf: 'center' }}>
       <Svg width={SIZE} height={SIZE} pointerEvents="none">
         <Circle cx={C} cy={C} r={152} fill="#000000" />
         <Circle cx={C} cy={C} r={104} fill={color.cardRaised} />
@@ -113,6 +121,7 @@ export function SleepRing({ bed, wake, onChange, onDrag }: { bed: number; wake: 
         <SymbolView name="sun.max.fill" size={20} tintColor={color.goal} />
       </View>
     </View>
+    </GestureDetector>
   );
 }
 

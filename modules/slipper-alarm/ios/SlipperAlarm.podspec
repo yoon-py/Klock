@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
-  s.name           = 'SlipperAudio'
+  s.name           = 'SlipperAlarm'
   s.version        = '1.0.0'
-  s.summary        = 'Slipper monaural beat generator'
-  s.description    = 'Generates one monaural beat (two sine waves summed in one channel) in real time.'
+  s.summary        = 'Slipper alarms via AlarmKit'
+  s.description    = 'Schedules, cancels and inspects AlarmKit alarms (iOS 26+).'
   s.author         = ''
   s.homepage       = 'https://example.invalid'
   s.platforms      = { :ios => '26.0' }
@@ -11,6 +11,7 @@ Pod::Spec.new do |s|
   s.static_framework = true
 
   s.dependency 'ExpoModulesCore'
+  s.frameworks = 'AlarmKit'
 
   s.source_files = "**/*.{h,m,swift}"
   s.pod_target_xcconfig = {

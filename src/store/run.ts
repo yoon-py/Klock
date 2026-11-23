@@ -8,6 +8,7 @@ import { wakeSoundFile } from '../sounds';
 export type Run = { missions: MissionConfig[]; index: number; preview: boolean; label: string; startedAt: number };
 
 let run: Run = { missions: [], index: 0, preview: true, label: '', startedAt: 0 };
+let onDone: (() => void) | undefined;
 let player: AudioPlayer | null = null;
 let ramp: ReturnType<typeof setInterval> | undefined;
 
@@ -18,8 +19,9 @@ const ROUTE: Record<MissionConfig['type'], string> = {
 };
 
 /** 알람 화면부터 시작. 미리보기면 기록을 남기지 않아요. */
-export function startRun(missions: MissionConfig[], opts: { preview: boolean; label?: string }) {
+export function startRun(missions: MissionConfig[], opts: { preview: boolean; label?: string; onDone?: () => void }) {
   run = { missions, index: 0, preview: opts.preview, label: opts.label ?? '', startedAt: Date.now() };
+  onDone = opts.onDone;
   startSound();
   router.push('/run/alarm');
 }
@@ -42,6 +44,8 @@ export function backToAlarm() {
 /** 다 끝냄: 미리보기면 완료 화면, 실제 알람이면 아침 화면(나중 묶음) */
 export function finish() {
   stopSound();
+  if (!run.preview) onDone?.(); // 실제 알람이면 뒤따르는 알람을 지워요 (src/alarm.ts)
+  onDone = undefined;
   router.replace('/run/done');
 }
 

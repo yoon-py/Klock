@@ -23,11 +23,11 @@ const defaults = {
   wakeOnce: null as { at: string; replaces: string } | null,
   alarms: [] as ExtraAlarm[],
   sleepSound: {
-    monauralBeat: true,
     scenes: ['fire'],
-    volumes: { beat: 0.35, sceneA: 0.75, sceneB: 0.5 },
+    volumes: { sceneA: 0.75, sceneB: 0.5 },
     offAfter: 30,
     favorites: [],
+    recent: [],
   } as SleepSound,
   // 사진·바코드 미션에 등록한 것들 (파일은 앱 문서 폴더)
   photos: [] as { id: string; uri: string }[],
@@ -36,6 +36,10 @@ const defaults = {
   prefs: { recordNight: true },
   // 처음 한 번만 보이는 안내들 (튜토리얼, 앱 제한·사운드 안내, 폰 두는 곳)
   seen: { tour: false, hintBlock: false, hintSound: false, phoneTip: false },
+  // AlarmKit 알람 (src/alarm.ts): 울릴 것(key) → 예약한 알람 id들, 지금 미션 중인 것, 미션까지 끝낸 것
+  ringIds: {} as Record<string, string[]>,
+  activeRing: null as string | null,
+  doneRings: [] as string[],
   // 수면 중 상태 (src/store/night.ts). 밤중에 앱이 꺼졌다 다시 열려도 이어서 하려고 저장해요
   night: { active: false, phase: 'sound' as 'sound' | 'listen', startedAt: 0, offAt: null as number | null, wakeAt: 0 },
 };

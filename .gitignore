@@ -39,3 +39,6 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# 경쟁 앱 화면 캡처 (분석용, 약 200MB. 보고서 docs/benchmark/report.md만 올려요)
+docs/benchmark/*/

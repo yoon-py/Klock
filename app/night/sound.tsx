@@ -32,9 +32,9 @@ export default function NightSound() {
   const dim = night.startedAt && now - night.startedAt > 30_000 ? 0.75 : 0.55; // 30초 뒤 더 어둡게
   const nextScene = SCENES.find((x) => !ss.scenes.includes(x.id));
 
-  const setVol = (k: 'beat' | 'sceneA' | 'sceneB', v: number) => {
+  const setVol = (k: 'sceneA' | 'sceneB', v: number) => {
     setSs({ ...get('sleepSound'), volumes: { ...get('sleepSound').volumes, [k]: v } });
-    setLayerVolume(k === 'beat' ? 'beat' : k === 'sceneA' ? 'a' : 'b', v);
+    setLayerVolume(k === 'sceneA' ? 'a' : 'b', v);
   };
   const setSecond = (id: string | null) => {
     set('sleepSound', { ...get('sleepSound'), scenes: id ? [ss.scenes[0], id as never].filter(Boolean) : ss.scenes.slice(0, 1) });
@@ -59,7 +59,7 @@ export default function NightSound() {
         </Pressable>
         <View style={{ marginTop: 26, flexDirection: 'row', alignItems: 'center', gap: 8 }}>
           <SymbolView name="music.note" size={16} tintColor="rgba(255,255,255,0.7)" />
-          <Text style={{ fontSize: 16, color: 'rgba(255,255,255,0.7)' }}>{soundLine(ss.scenes, ss.monauralBeat)}</Text>
+          <Text style={{ fontSize: 16, color: 'rgba(255,255,255,0.7)' }}>{soundLine(ss.scenes)}</Text>
         </View>
         <Text style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)' }}>
           {ss.offAfter === 'morning' ? '알람 30분 전에 서서히 꺼져요' : `${mm}:${sec} 뒤 서서히 꺼지고, 그때부터 코골이를 들어요`}
@@ -86,7 +86,6 @@ export default function NightSound() {
             <Text style={{ fontSize: 22, fontWeight: '700', color: '#FFF' }}>소리 섞기</Text>
             <Pressable onPress={() => setSheet(null)}><Text style={st.done}>완료</Text></Pressable>
           </View>
-          <Layer name="모노럴 비트" note="바닥에 낮게" value={ss.volumes.beat} onChange={(v) => setVol('beat', v)} />
           <Layer name={a?.name ?? '장면 없음'} note="장면 1" value={ss.volumes.sceneA} onChange={(v) => setVol('sceneA', v)} />
           {ss.scenes[1] ? (
             <Layer name={scene(ss.scenes[1])!.name} value={ss.volumes.sceneB} onChange={(v) => setVol('sceneB', v)} onRemove={() => setSecond(null)} />

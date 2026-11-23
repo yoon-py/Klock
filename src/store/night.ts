@@ -1,11 +1,9 @@
-// 수면 중 상태: 소리 레이어(모노럴 비트 + 장면 1·2) 재생 → 정한 시간 뒤 서서히 꺼짐 → 소리 듣기(녹음)
+// 수면 중 상태: 소리 레이어(장면 1·2) 재생 → 정한 시간 뒤 서서히 꺼짐 → 소리 듣기(녹음)
 // SPEC 8장. 비트는 하나만, 장면 소리는 그 위에 섞어요.
 import { useSyncExternalStore } from 'react';
 import { createAudioPlayer, setAudioModeAsync } from 'expo-audio';
-import SlipperAudio from '../../modules/slipper-audio';
 import { get, set, saveNight, getNights } from './index';
-import { BEAT_FILE, scene } from '../scenes';
-import { BEAT } from '../config/thresholds';
+import { scene } from '../scenes';
 import { toMin } from '../time';
 
 type Night = { active: boolean; phase: 'sound' | 'listen'; startedAt: number; offAt: number | null; wakeAt: number };
@@ -16,7 +14,7 @@ const setNight = (n: Partial<Night>) => { night = { ...night, ...n }; set('night
 export const useNight = () => useSyncExternalStore((l) => (listeners.add(l), () => listeners.delete(l)), () => night);
 
 type Layer = { volume: number; pause(): void; remove(): void };
-let players: { beat?: Layer; a?: Layer; b?: Layer } = {};
+let players: { a?: Layer; b?: Layer } = {};
 let offTimer: ReturnType<typeof setTimeout> | undefined;
 let fadeTimer: ReturnType<typeof setInterval> | undefined;
 
@@ -75,8 +73,9 @@ export async function startSound(resetTimer = true) {
   stopPlayers();
   const s = get('sleepSound');
   const wake = nextWake();
+  // 최근에 들은 조합 맨 앞에 (같은 조합은 앞으로 옮김, SPEC 8장)
+  if (s.scenes.length) set('sleepSound', { ...s, recent: [s.scenes, ...(s.recent ?? []).filter((r) => r.join() !== s.scenes.join())].slice(0, 3) });
   await setAudioModeAsync({ playsInSilentMode: true, shouldPlayInBackground: true });
-  if (s.monauralBeat) players.beat = SlipperAudio ? beat(s.volumes.beat) : loop(BEAT_FILE, s.volumes.beat);
   const a = scene(s.scenes[0])?.sound, b = scene(s.scenes[1])?.sound;
   if (a) players.a = loop(a, s.volumes.sceneA);
   if (b) players.b = loop(b, s.volumes.sceneB);
@@ -97,21 +96,8 @@ function loop(src: number, volume: number) {
   return p;
 }
 
-/** 앱이 직접 만드는 모노럴 비트 (설치판). 다른 소리 레이어와 같은 모양으로 감싸요 */
-function beat(volume: number): Layer {
-  const m = SlipperAudio!;
-  let v = volume;
-  m.start(BEAT.carrierHz, BEAT.beatHz, BEAT.amplitude, v, BEAT.fadeInSec);
-  return {
-    get volume() { return v; },
-    set volume(x) { v = x; m.setVolume(x); },
-    pause: () => m.stop(),
-    remove: () => {},
-  };
-}
-
 /** 소리 섞기 시트에서 음량을 바꿀 때 */
-export function setLayerVolume(layer: 'beat' | 'a' | 'b', v: number) {
+export function setLayerVolume(layer: 'a' | 'b', v: number) {
   const p = players[layer];
   if (p) p.volume = v;
 }

@@ -31,6 +31,8 @@ wake xylophone assets/placeholder/sounds \
 "${F[@]}" -f lavfi -i "anoisesrc=color=brown:sample_rate=44100:duration=300:amplitude=0.6" \
   -af "lowpass=f=900,tremolo=f=0.1:d=0.4,loudnorm=I=-24" -c:a aac -b:a 96k assets/placeholder/sounds/scene_snow.m4a
 
-# 모노럴 비트 "잔잔하게" (SPEC 8장): 200Hz + 203Hz 를 한 채널에 더해 3Hz 맥박. 비트는 하나만 (특허 회피, 메모 참고)
-# 10초 = 두 사인파 모두 정수 주기라서 이어 붙여도 이음새가 없어요.
-"${F[@]}" -f lavfi -i "aevalsrc='0.35*sin(2*PI*200*t)+0.35*sin(2*PI*203*t)':s=22050:d=10" -ac 1 -c:a pcm_s16le assets/sounds/beat_calm.caf
+# 백색·분홍·갈색 소음 (SPEC 8장). 2분짜리를 반복해요. 잡음이라 이어 붙여도 이음새가 안 들려요.
+mkdir -p assets/sounds/noise
+for c in white pink brown; do
+  "${F[@]}" -f lavfi -i "anoisesrc=color=${c}:sample_rate=44100:duration=120:amplitude=0.6" -af "highpass=f=30,loudnorm=I=-26:TP=-3" -ac 1 -c:a aac -b:a 96k "assets/sounds/noise/${c}.m4a"
+done

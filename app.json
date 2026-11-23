@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Slipper",
+    "name": "Klock",
     "slug": "slipper",
     "scheme": "slipper",
     "version": "1.0.0",
@@ -10,7 +10,16 @@
     "ios": {
       "bundleIdentifier": "com.slipper.app",
       "deploymentTarget": "26.0",
-      "supportsTablet": false
+      "supportsTablet": false,
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSAlarmKitUsageDescription": "정한 기상 시각에 무음 모드에서도 알람을 울려요.",
+        "NSCameraUsageDescription": "사진·바코드·스쿼트 미션에서 카메라를 써요. 영상은 폰 안에서만 확인하고 저장하거나 보내지 않아요.",
+        "NSMicrophoneUsageDescription": "따라 말하기 미션과 밤사이 소리를 듣는 데 마이크를 써요. 폰 밖으로 보내지 않아요.",
+        "NSSpeechRecognitionUsageDescription": "따라 말하기 미션에서 말한 문장을 폰 안에서 알아들어요.",
+        "NSMotionUsageDescription": "걷기 미션에서 걸음 수를 세요.",
+        "NSPhotoLibraryUsageDescription": "사진 미션에 쓸 사진을 앨범에서 골라요."
+      }
     },
     "plugins": [
       "expo-router",
@@ -18,7 +27,18 @@
       "@react-native-community/datetimepicker",
       "expo-font",
       "expo-status-bar",
-      "expo-audio"
+      "expo-audio",
+      "./plugins/with-mediapipe-link",
+      [
+        "expo-notifications",
+        {
+          "sounds": [
+            "./assets/sounds/wake/classic.caf",
+            "./assets/placeholder/sounds/dawn_bell.caf",
+            "./assets/placeholder/sounds/xylophone.caf"
+          ]
+        }
+      ]
     ],
     "extra": {
       "router": {},
@@ -26,6 +46,9 @@
         "projectId": "a4131e87-d3f6-41fb-be0d-20e7324e9e5a"
       }
     },
-    "owner": "kimyoonhwan"
+    "owner": "kimyoonhwan",
+    "android": {
+      "package": "com.slipper.app"
+    }
   }
 }

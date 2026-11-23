@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { SymbolView } from 'expo-symbols';
-import { Switch } from '../src/components';
 import { get, set, type SleepSound } from '../src/store';
 import { getNightState, startSound } from '../src/store/night';
 import { SCENES } from '../src/scenes';
@@ -41,15 +40,6 @@ export default function SoundSheet() {
       </View>
 
       <ScrollView contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 40 }}>
-        <View style={st.beat}>
-          <SymbolView name="waveform" size={20} tintColor="#C9C2FF" />
-          <View style={{ flex: 1, gap: 2 }}>
-            <Text style={{ fontSize: 17, color: '#FFF' }}>모노럴 비트</Text>
-            <Text style={{ fontSize: 13, color: color.nightSecondary }}>고른 소리 밑에 낮게 깔려요 · 스피커로도 돼요</Text>
-          </View>
-          <Switch tint={color.night} value={s.monauralBeat} onValueChange={(v) => setS({ ...s, monauralBeat: v })} accessibilityLabel="모노럴 비트" />
-        </View>
-
         <View accessibilityRole="radiogroup" style={{ marginTop: 10 }}>
           {SCENES.map((x) => {
             const on = sel === x.id, fav = s.favorites.includes(x.id);
@@ -95,7 +85,6 @@ export default function SoundSheet() {
 const st = StyleSheet.create({
   head: { height: 60, marginTop: 8, paddingHorizontal: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   textBtn: { height: 44, paddingHorizontal: 8, justifyContent: 'center' },
-  beat: { minHeight: 64, marginTop: 4, paddingHorizontal: 12, borderRadius: 16, backgroundColor: 'rgba(169,157,255,0.10)', flexDirection: 'row', alignItems: 'center', gap: 12 },
   row: { minHeight: 52, paddingHorizontal: 12, borderRadius: 12, flexDirection: 'row', alignItems: 'center', gap: 12 },
   tag: { height: 26, paddingHorizontal: 8, borderRadius: 7, backgroundColor: 'rgba(110,140,240,0.18)', justifyContent: 'center' },
   seg: { height: 40, padding: 3, borderRadius: 11, backgroundColor: 'rgba(118,118,128,0.24)', flexDirection: 'row', gap: 3 },

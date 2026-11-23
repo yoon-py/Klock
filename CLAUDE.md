@@ -17,17 +17,19 @@
 ## 기술 기준
 
 - React Native + Expo(Development Build), TypeScript strict.
-- 네이티브 기능(알람, 스크린 타임, 센서, 소리 분석 등)은 Expo Modules API로 `modules/` 아래에 Swift/Kotlin으로 만듭니다. 기능마다 모듈 하나(`slipper-alarm`, `slipper-screentime`, `slipper-audio`, `slipper-motion`, `slipper-vision`, `slipper-speech`).
+- 네이티브 기능(알람, 스크린 타임, 센서, 소리 분석 등)은 Expo Modules API로 `modules/` 아래에 Swift/Kotlin으로 만듭니다. 기능마다 모듈 하나(`slipper-alarm`, `slipper-screentime`, `slipper-audio`, `slipper-motion`, `slipper-vision`, `slipper-health`). 걸음 수는 `expo-sensors`, 따라 말하기 음성 인식은 `expo-speech-recognition`(기기 안 인식만)을 씀.
 - 화면은 `app/`(expo-router), 공통 부품은 `src/components/`, 상태·저장은 `src/store/`, 디자인 값은 `src/theme/`.
 - 서버는 없습니다. 모든 데이터는 기기 안에 저장합니다.
 
 ## 디자인 규칙 (반드시 지킬 것)
 
-- **애플 기본 앱처럼**: 시스템 글꼴(SF Pro / Android 기본), 큰 제목, 그룹 목록, 글자 버튼. 장식용 그라데이션·알약 칩·의미 없는 아이콘을 새로 만들지 마세요.
+- **아트 디렉션은 `SPEC.md` 2-1장이 기준**입니다(2026-10-22 변경: "애플 기본 앱처럼"을 버리고 "밤에서 새벽으로" 컨셉의 일러스트·애니메이션·영상 중심으로). 경쟁 앱 실제 화면 분석은 `docs/benchmark/report.md`.
+- 일러스트는 앱 안에서 벡터(SVG)로 그리고, 움직임은 Reanimated로 만듭니다. 일러스트 스타일·색·움직임 규칙을 섞지 마세요(서로 다른 곳에서 가져온 그림을 섞으면 싸 보입니다).
 - 디자인 파일에 없는 화면·버튼·문구를 임의로 추가하지 마세요. 꼭 필요하면 먼저 사용자에게 물어보세요.
-- 색: 낮 화면 강조색 주황 `#FF9F0A`, 밤 화면(수면 탭·수면 중) 보라 `#A99DFF`, 배경 검정, 카드 `#1C1C1E`, 보조 글자 `#98989F`. 수면 목표 충족 노랑 `#FFD60A`.
-- 아이콘: iOS는 SF Symbols, Android는 Material Symbols. 직접 그린 아이콘은 쓰지 마세요.
-- 다크 모드만 지원(v1).
+- 색 토큰은 `SPEC.md` 2-1장과 `src/theme/` 한 곳에만 둡니다. 낮 강조 주황 `#FF9F0A`, 밤 강조 라벤더 `#A99DFF`.
+- 아이콘: 기능 아이콘은 iOS SF Symbols, Android Material Symbols. 일러스트·장면 그림은 2-1장의 그림 규칙을 따릅니다.
+- 움직임 줄이기 설정을 켠 사용자에게는 애니메이션 대신 정지 화면/짧은 페이드를 보여 줍니다.
+- 다크 모드만 지원.
 
 ## 작업 방식
 

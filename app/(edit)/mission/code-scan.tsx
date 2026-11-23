@@ -21,6 +21,7 @@ export default function CodeScan() {
   const cam = useRef<CameraView>(null);
   const [torch, setTorch] = useState(false);
   const [found, setFound] = useState<string | null>(null);
+  const busy = useRef(false); // 카메라가 같은 코드를 연달아 보내도 한 번만 처리해요 (state는 다음 렌더까지 늦게 바뀜)
   const side = (useWindowDimensions().width - BOX) / 2;
   const line = useRef(new Animated.Value(0)).current;
   useEffect(() => {
@@ -29,7 +30,8 @@ export default function CodeScan() {
   if (!granted) return <PermissionOff />;
 
   const onScan = async (value: string) => {
-    if (found) return;
+    if (busy.current) return;
+    busy.current = true;
     setFound(value);
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     // 아침에 어디로 갈지 보여 주려고 물건 사진도 한 장 같이 저장해요 (SPEC 6.6)
@@ -56,7 +58,7 @@ export default function CodeScan() {
         style={StyleSheet.absoluteFill}
         enableTorch={torch}
         barcodeScannerSettings={{ barcodeTypes: [...BARCODE_TYPES] }}
-        onBarcodeScanned={(r) => onScan(r.data)}
+        onBarcodeScanned={found ? undefined : (r) => onScan(r.data)}
       />
       {/* 사각형 밖은 어둡게 */}
       <View style={[st.dim, { left: 0, right: 0, top: 0, height: TOP }]} />

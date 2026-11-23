@@ -1,13 +1,23 @@
-// 알람 울리기 (Expo Go 판). 정한 시각에 알림을 보내고, 누르거나 앱이 열려 있으면 알람 화면 → 미션.
-// ponytail: 알림 소리는 기본음 한 번뿐이라 1분 간격으로 5번 더 보내요. 무음 모드·잠금 화면에서 계속 울리는 건 AlarmKit(설치판)에서.
+// 알람 울리기. 설치판은 AlarmKit(무음 모드에서도 울림), 없으면(Expo Go) 알림으로 대신 울려요.
+// 정한 시각에 울리고, 앱을 열면 알람 화면 → 미션. AlarmKit 알람은 정지 버튼을 뺄 수 없어서,
+// 미션을 끝낼 때까지 뒤따르는 알람을 미리 예약해 두고 끝내면 지워요 (SPEC 6.14).
 import * as Notifications from 'expo-notifications';
+import SlipperAlarm from '../modules/slipper-alarm';
 import { get, set } from './store';
 import { endNight, getNightState, nextWake } from './store/night';
 import { startRun } from './store/run';
 import { toMin } from './time';
 
-const FOLLOW_UPS = 5;
+const FOLLOW_UPS = 5; // 알림판: 1분 간격
 const MAX_RINGS = 10; // iOS는 예약 알림이 64개까지라 (1 + 5) x 10
+const KIT_FOLLOW_UPS = 10; // AlarmKit판: 정지만 누르고 미션을 안 하면 3분마다 다시 (30분까지)
+const KIT_FOLLOW_GAP = 3 * 60_000;
+const NAG_GAP = 5 * 60_000; // 미션을 시작한 뒤에는 5분마다 (미션 중에 바로 다시 울리지 않게)
+const RING_WINDOW = 60 * 60_000; // 울린 지 1시간 안이면 앱을 열 때 알람 화면
+
+// 기상 사운드 id → 앱에 넣은 소리 파일 이름 (app.json의 expo-notifications sounds). 없는 건 새벽 종소리
+const KIT_SOUND: Record<string, string> = { classic: 'classic.caf', dawn_bell: 'dawn_bell.caf', xylophone: 'xylophone.caf' };
+const kitSound = () => KIT_SOUND[get('schedule').wakeSound] ?? 'dawn_bell.caf';
 
 type Ring = { key: string; at: Date; label: string; hasMissions: boolean };
 
@@ -41,6 +51,7 @@ function upcomingRings(now = new Date()): Ring[] {
 /** 일정·알람이 바뀔 때마다 예약을 새로 해요 */
 export async function scheduleAlarms() {
   await Notifications.cancelAllScheduledNotificationsAsync();
+  if (SlipperAlarm) return scheduleKit();
   const rings = upcomingRings();
   if (!rings.length) return;
   const perm = await Notifications.requestPermissionsAsync();
@@ -60,31 +71,83 @@ export async function scheduleAlarms() {
   }
 }
 
-const handled = new Set<string>();
+/** AlarmKit판 예약: 지금 미션 중인 알람의 것만 남기고 모두 새로 */
+async function scheduleKit() {
+  const kit = SlipperAlarm!;
+  const active = get('activeRing');
+  const keep = active ? { [active]: get('ringIds')[active] ?? [] } : {};
+  const keepIds = new Set(Object.values(keep).flat());
+  for (const ids of Object.values(get('ringIds'))) for (const id of ids) if (!keepIds.has(id)) kit.cancel(id);
+  const rings = upcomingRings();
+  const ringIds: Record<string, string[]> = { ...keep };
+  set('ringIds', ringIds);
+  if (!rings.length || !(await kit.requestAuthorization())) return;
+  // 알림도 같이 하나 보내요. 알람 화면에서 바로 앱으로 들어올 수 있게 (소리는 알람이 내요)
+  await Notifications.requestPermissionsAsync();
+  const sound = kitSound();
+  for (const r of rings) {
+    const title = r.label || '좋은 아침이에요';
+    const ids: string[] = [];
+    for (let k = 0; k <= (r.hasMissions ? KIT_FOLLOW_UPS : 0); k++) ids.push(await kit.schedule(r.at.getTime() + k * KIT_FOLLOW_GAP, title, sound));
+    ringIds[r.key] = ids;
+    await Notifications.scheduleNotificationAsync({
+      content: { title, body: r.hasMissions ? '눌러서 미션을 시작하세요. 미션을 끝내야 알람이 꺼져요.' : '눌러서 알람을 꺼요.', sound: false, data: { ring: r.key } },
+      trigger: { type: Notifications.SchedulableTriggerInputTypes.DATE, date: r.at },
+    });
+  }
+  set('ringIds', ringIds);
+}
 
-/** 앱을 열었을 때: 알림을 눌러 열었거나, 울린 알림이 아직 남아 있으면 알람 화면 */
+const handled = new Set<string>();
+const atOf = (key: string) => new Date(key.split('@')[1]).getTime();
+
+/** 앱을 열었을 때·앞으로 돌아왔을 때: 울리는 중이거나 울린 지 1시간 안에 미션을 안 끝낸 알람이 있으면 알람 화면 */
 export async function ringIfPending() {
   const tapped = Notifications.getLastNotificationResponse()?.notification;
   const shown = await Notifications.getPresentedNotificationsAsync();
-  // 지난번에 누른 알림이 다시 잡히지 않게, 30분 안에 울린 것만
-  const fresh = (k: unknown): k is string => typeof k === 'string' && Math.abs(Date.now() - new Date(k.split('@')[1]).getTime()) < 30 * 60_000;
-  const key = [tapped, ...shown].map((n) => n?.request.content.data?.ring).find(fresh);
+  const now = Date.now();
+  const fresh = (k: unknown): k is string => typeof k === 'string' && now >= atOf(k) - 60_000 && now - atOf(k) < RING_WINDOW && !get('doneRings').includes(k);
+  let key = [tapped, ...shown].map((n) => n?.request.content.data?.ring).find(fresh);
+  if (!key && SlipperAlarm) {
+    const alerting = new Set(SlipperAlarm.alerting());
+    const ringIds = get('ringIds');
+    key = Object.keys(ringIds).find((k) => fresh(k) && (ringIds[k].some((id) => alerting.has(id)) || now >= atOf(k)));
+  }
   if (key) await ring(key);
 }
 
 /** 알림이 왔거나(앱이 열려 있을 때) 알림을 눌렀을 때: 알람 화면을 띄워요 */
 export async function ring(key: string) {
-  if (handled.has(key)) return;
+  if (handled.has(key) || get('doneRings').includes(key)) return;
   handled.add(key);
   // 남은 반복 알림은 지워요
   const left = await Notifications.getAllScheduledNotificationsAsync();
   await Promise.all(left.filter((n) => n.content.data?.ring === key).map((n) => Notifications.cancelScheduledNotificationAsync(n.identifier)));
   await Notifications.dismissAllNotificationsAsync();
-  if (getNightState().active) endNight();
   const id = key.split('@')[0];
   const alarm = get('alarms').find((a) => a.id === id);
+  const missions = alarm ? alarm.missions : get('schedule').missions;
+  if (SlipperAlarm) {
+    // 울리는 알람은 멈추고(소리는 앱이 내요), 뒤따르는 알람은 미션 중에 바로 안 울리게 5분 간격으로 다시
+    const kit = SlipperAlarm;
+    for (const x of get('ringIds')[key] ?? []) { kit.stop(x); kit.cancel(x); }
+    const ids: string[] = [];
+    if (missions.length) for (let k = 1; k <= KIT_FOLLOW_UPS; k++) ids.push(await kit.schedule(Date.now() + k * NAG_GAP, '미션을 끝내야 알람이 꺼져요', kitSound()));
+    set('ringIds', { ...get('ringIds'), [key]: ids });
+    set('activeRing', key);
+  }
+  if (getNightState().active) endNight();
   if (alarm && !alarm.repeat.some(Boolean)) set('alarms', get('alarms').map((a) => (a.id === id ? { ...a, enabled: false } : a))); // 1회성은 울린 뒤 꺼요
-  startRun(alarm ? alarm.missions : get('schedule').missions, { preview: false, label: alarm?.label });
+  startRun(missions, { preview: false, label: alarm?.label, onDone: () => doneRing(key) });
+}
+
+/** 미션까지 다 끝냄: 뒤따르는 알람을 모두 지워요 */
+function doneRing(key: string) {
+  if (SlipperAlarm) for (const id of get('ringIds')[key] ?? []) SlipperAlarm.cancel(id);
+  const { [key]: _, ...rest } = get('ringIds');
+  set('ringIds', rest);
+  set('activeRing', null);
+  set('doneRings', [key, ...get('doneRings')].slice(0, 30));
 }
 
 // 앱이 열려 있을 때는 알림 배너·소리 대신 바로 알람 화면 (기상 사운드는 앱이 틀어요)

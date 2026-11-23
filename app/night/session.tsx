@@ -92,7 +92,7 @@ export default function NightSession() {
       <View style={st.card}>
         <View style={st.thumb}><SymbolView name="moon.fill" size={18} tintColor="#C9C2FF" /></View>
         <View style={{ flex: 1, gap: 2 }}>
-          <Text style={{ fontSize: 17, color: '#FFF' }} numberOfLines={1}>{soundLine(ss.scenes, ss.monauralBeat)}</Text>
+          <Text style={{ fontSize: 17, color: '#FFF' }} numberOfLines={1}>{soundLine(ss.scenes)}</Text>
           <Text style={{ fontSize: 13, color: '#8E90A8' }}>소리가 꺼졌어요 · 코골이를 듣는 중</Text>
         </View>
         <Pressable accessibilityLabel="수면 사운드 고르기" onPress={() => router.push('/sound-sheet')} style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}>

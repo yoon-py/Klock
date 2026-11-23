@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { AppState } from 'react-native';
 import { Stack, router } from 'expo-router';
 import * as Notifications from 'expo-notifications';
 import { ring, ringIfPending, scheduleAlarms } from '../src/alarm';
@@ -24,7 +25,9 @@ export default function RootLayout() {
     const onRing = (n: Notifications.Notification) => { const k = n.request.content.data?.ring; if (typeof k === 'string') ring(k); };
     const a = Notifications.addNotificationReceivedListener(onRing);
     const b = Notifications.addNotificationResponseReceivedListener((r) => onRing(r.notification));
-    return () => { clearTimeout(t); a.remove(); b.remove(); };
+    // 알람을 정지하고 홈 화면에서 앱을 다시 열었을 때도 미션으로
+    const c = AppState.addEventListener('change', (s) => { if (s === 'active') ringIfPending().catch(() => {}); });
+    return () => { clearTimeout(t); a.remove(); b.remove(); c.remove(); };
   }, []);
 
   return (
@@ -36,6 +39,8 @@ export default function RootLayout() {
         <Stack.Screen name="(edit)" options={{ presentation: 'modal', gestureEnabled: false }} />
         {/* 알람 → 미션 (미리보기도 같은 흐름). 미션을 끝내야 나갈 수 있어요 */}
         <Stack.Screen name="run" options={{ presentation: 'fullScreenModal', gestureEnabled: false }} />
+        {/* 수면 가이드 (탐색 탭에서) */}
+        <Stack.Screen name="guide/breath" options={{ presentation: 'fullScreenModal', gestureEnabled: false, contentStyle: { backgroundColor: '#06060B' } }} />
         {/* 수면 중 화면들 */}
         <Stack.Screen name="night" options={{ presentation: 'fullScreenModal', gestureEnabled: false }} />
         <Stack.Screen name="report-dates" options={{ presentation: 'formSheet', sheetAllowedDetents: [0.8], sheetCornerRadius: 28, contentStyle: { backgroundColor: '#1C1C1E' } }} />

@@ -11,7 +11,7 @@ export type WakeSoundId =
   | 'dawn_bell' | 'sunrise_forest' | 'birds' | 'stream' | 'piano'
   | 'xylophone' | 'wind_chime' | 'guitar' | 'classic';
 
-export type SceneId = 'fire' | 'rain' | 'sea' | 'train' | 'snow' | 'bugs' | 'fan';
+export type SceneId = 'fire' | 'rain' | 'sea' | 'train' | 'snow' | 'bugs' | 'fan' | 'white' | 'pink' | 'brown';
 
 export type SleepSchedule = {
   enabled: boolean;
@@ -37,11 +37,11 @@ export type ExtraAlarm = {
 };
 
 export type SleepSound = {
-  monauralBeat: boolean;
   scenes: SceneId[];
-  volumes: { beat: number; sceneA: number; sceneB: number };
+  volumes: { sceneA: number; sceneB: number };
   offAfter: 30 | 60 | 'morning';
   favorites: SceneId[];
+  recent: SceneId[][]; // 최근에 들은 조합, 최대 3개
 };
 
 export type NightRecord = {
