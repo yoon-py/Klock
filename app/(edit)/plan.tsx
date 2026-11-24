@@ -59,7 +59,7 @@ function TimeLabel({ icon, label, value }: { icon: 'bed.double.fill' | 'alarm.fi
   return (
     <View style={{ flex: 1, alignItems: 'center', gap: 2 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-        <SymbolView name={icon} size={15} tintColor="#7D7AFF" />
+        <SymbolView name={icon} size={15} tintColor="#A8A8AE" />
         <Text style={{ fontSize: 14, fontWeight: '600', color: color.textSecondary }}>{label}</Text>
       </View>
       <Text style={{ fontSize: 30, fontWeight: '700', letterSpacing: -0.4, color: color.text }}>{value}</Text>

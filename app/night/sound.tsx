@@ -30,7 +30,7 @@ export default function NightSound() {
   const leftMs = night.offAt ? Math.max(0, night.offAt - now) : 0;
   const mm = String(Math.floor(leftMs / 60000)).padStart(2, '0'), sec = String(Math.floor(leftMs / 1000) % 60).padStart(2, '0');
   const dim = night.startedAt && now - night.startedAt > 30_000 ? 0.75 : 0.55; // 30초 뒤 더 어둡게
-  const nextScene = SCENES.find((x) => !ss.scenes.includes(x.id));
+  const nextScene = SCENES.find((x) => !!x.sound && !ss.scenes.includes(x.id));
 
   const setVol = (k: 'sceneA' | 'sceneB', v: number) => {
     setSs({ ...get('sleepSound'), volumes: { ...get('sleepSound').volumes, [k]: v } });
@@ -71,7 +71,7 @@ export default function NightSound() {
           <SymbolView name="music.note.list" size={28} tintColor="#E5E5EA" />
         </Pressable>
         <Pressable accessibilityLabel="수면 종료" onPress={() => setSheet('end')} style={st.endBtn}>
-          <SymbolView name="xmark" size={28} tintColor="#1C1C1E" weight="bold" />
+          <SymbolView name="xmark" size={28} tintColor={color.card} weight="bold" />
         </Pressable>
         <Pressable accessibilityLabel="더보기" onPress={() => setSheet('more')} style={st.ctl}>
           <SymbolView name="ellipsis" size={28} tintColor="#E5E5EA" />
@@ -91,7 +91,7 @@ export default function NightSound() {
             <Layer name={scene(ss.scenes[1])!.name} value={ss.volumes.sceneB} onChange={(v) => setVol('sceneB', v)} onRemove={() => setSecond(null)} />
           ) : nextScene && a ? (
             <Pressable onPress={() => setSecond(nextScene.id)} style={st.addB}>
-              <Text style={{ fontSize: 16, fontWeight: '600', color: '#C9C2FF' }}>+ 장면 하나 더 섞기 · {nextScene.name}</Text>
+              <Text style={{ fontSize: 16, fontWeight: '600', color: color.night }}>+ 장면 하나 더 섞기 · {nextScene.name}</Text>
             </Pressable>
           ) : null}
           <Text style={{ marginTop: 12, fontSize: 13, color: color.nightSecondary }}>장면은 2개까지 섞을 수 있어요. 배경 화면은 장면 1을 따라가요.</Text>
@@ -138,7 +138,7 @@ function Layer({ name, note, value, onChange, onRemove }: { name: string; note?:
 function MenuItem({ icon, label, onPress }: { icon: 'music.note' | 'moon.fill'; label: string; onPress: () => void }) {
   return (
     <Pressable onPress={onPress} style={{ height: 56, paddingHorizontal: 12, flexDirection: 'row', alignItems: 'center', gap: 12 }}>
-      <SymbolView name={icon} size={20} tintColor="#C9C2FF" />
+      <SymbolView name={icon} size={20} tintColor="#D1D1D6" />
       <Text style={{ fontSize: 17, color: '#FFF' }}>{label}</Text>
     </Pressable>
   );
@@ -154,6 +154,6 @@ const st = StyleSheet.create({
   panel: { position: 'absolute', left: 8, right: 8, bottom: 8, paddingHorizontal: 20, paddingTop: 10, paddingBottom: 26, borderRadius: 34, backgroundColor: 'rgba(40,40,48,0.96)' },
   panelHead: { height: 52, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   done: { fontSize: 17, fontWeight: '600', color: color.night },
-  addB: { marginTop: 6, height: 52, borderRadius: 14, backgroundColor: 'rgba(169,157,255,0.14)', alignItems: 'center', justifyContent: 'center' },
+  addB: { marginTop: 6, height: 52, borderRadius: 14, backgroundColor: 'rgba(255,255,255,0.08)', alignItems: 'center', justifyContent: 'center' },
   close: { marginTop: 6, height: 50, borderRadius: 14, backgroundColor: 'rgba(255,255,255,0.08)', alignItems: 'center', justifyContent: 'center' },
 });

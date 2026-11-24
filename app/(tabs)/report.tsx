@@ -95,7 +95,7 @@ export default function ReportTab() {
                 return (
                   <View key={x.date} style={{ flex: 1, alignItems: 'center', gap: 8 }}>
                     <View style={{ width: '100%', height: 120 }}>
-                      {x.slept ? <View style={[st.bar, { height: (x.slept / max) * 120, backgroundColor: on ? '#FFB547' : '#48484A' }]} /> : null}
+                      {x.slept ? <View style={[st.bar, { height: (x.slept / max) * 120, backgroundColor: on ? color.accent : color.fill }]} /> : null}
                       {x.goal ? <View style={[st.goal, { bottom: (x.goal / max) * 120 }]} /> : null}
                     </View>
                     <Text style={{ fontSize: 13, color: on ? '#FFF' : color.textSecondary, fontWeight: on ? '600' : '400' }}>{DOW[i]}</Text>
@@ -118,7 +118,7 @@ export default function ReportTab() {
             {night?.sounds.length ? (
               night.sounds.map((x, i) => (
                 <Pressable key={x.id} onPress={() => toggle(x.id, x.file)} accessibilityLabel={`${hm(x.at)} ${x.kind === 'snore' ? '코골이' : '잠꼬대'} 녹음 듣기`} style={[st.clip, i < night.sounds.length - 1 && st.sep]}>
-                  <View style={st.play}><SymbolView name={playing === x.id ? 'pause.fill' : 'play.fill'} size={12} tintColor="#1A1205" /></View>
+                  <View style={st.play}><SymbolView name={playing === x.id ? 'pause.fill' : 'play.fill'} size={12} tintColor="#041215" /></View>
                   <View style={{ flex: 1, gap: 2 }}>
                     <Text style={{ fontSize: 17, color: '#FFF' }}>{x.kind === 'snore' ? '코골이' : '잠꼬대'}</Text>
                     <Text style={{ fontSize: 13, color: color.textSecondary }}>{hm(x.at)}</Text>
@@ -172,5 +172,5 @@ const st = StyleSheet.create({
   goal: { position: 'absolute', alignSelf: 'center', width: 30, height: 2, borderRadius: 1, backgroundColor: 'rgba(255,255,255,0.75)' },
   clip: { minHeight: 58, paddingHorizontal: 16, paddingVertical: 8, flexDirection: 'row', alignItems: 'center', gap: 14 },
   sep: { borderBottomWidth: StyleSheet.hairlineWidth, borderColor: color.separator },
-  play: { width: 32, height: 32, borderRadius: 16, backgroundColor: '#FFB547', alignItems: 'center', justifyContent: 'center' },
+  play: { width: 32, height: 32, borderRadius: 16, backgroundColor: color.accent, alignItems: 'center', justifyContent: 'center' },
 });

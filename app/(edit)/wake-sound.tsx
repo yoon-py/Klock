@@ -4,14 +4,15 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { SymbolView } from 'expo-symbols';
 import * as Haptics from 'expo-haptics';
-import { createAudioPlayer, type AudioPlayer } from 'expo-audio';
-import { WAKE_SOUNDS, s as sheet } from '../../src/components/sheet';
-import { updateDraft, useDraft } from '../../src/store/draft';
-import { wakeSoundFile } from '../../src/sounds';
+import { createAudioPlayer, setAudioModeAsync, type AudioPlayer } from 'expo-audio';
+import { s as sheet } from '../../src/components/sheet';
+import { updateDraftAlarmSound, useDraft } from '../../src/store/draft';
+import { WAKE_SOUNDS, wakeSoundFile } from '../../src/sounds';
 import { color, font } from '../../src/theme';
 
 export default function WakeSound() {
   const d = useDraft();
+  const alarmSound = d.alarm ?? d.schedule;
   const player = useRef<AudioPlayer | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
   // remove()만 하면 iOS에서 소리가 계속 나서, 먼저 멈춰요
@@ -19,10 +20,11 @@ export default function WakeSound() {
   useEffect(() => stop, []);
 
   // 누르면 3초 미리 듣기
-  const preview = (id: string) => {
+  const preview = async (id: string) => {
     stop();
+    await setAudioModeAsync({ allowsRecording: false, shouldRouteThroughEarpiece: false, playsInSilentMode: true });
     const p = createAudioPlayer(wakeSoundFile(id));
-    p.volume = d.schedule.volume;
+    p.volume = Math.min(alarmSound.volume, 0.6);
     p.play();
     player.current = p;
     timer.current = setTimeout(() => p.pause(), 3000);
@@ -47,13 +49,13 @@ export default function WakeSound() {
 
       <View style={sheet.card} accessibilityRole="radiogroup">
         {WAKE_SOUNDS.map((w, i) => {
-          const on = d.schedule.wakeSound === w.id;
+          const on = alarmSound.wakeSound === w.id;
           return (
             <Pressable
               key={w.id}
               accessibilityRole="radio"
               accessibilityState={{ checked: on }}
-              onPress={() => { Haptics.selectionAsync(); updateDraft((x) => { x.schedule.wakeSound = w.id as never; }); preview(w.id); }}
+              onPress={() => { Haptics.selectionAsync(); updateDraftAlarmSound({ wakeSound: w.id }); preview(w.id); }}
               style={({ pressed }) => [sheet.row, { minHeight: 54 }, i < WAKE_SOUNDS.length - 1 && { borderBottomWidth: StyleSheet.hairlineWidth, borderColor: color.separator }, pressed && sheet.pressed]}>
               <Text style={{ ...font.body, color: color.text, flex: 1 }}>{w.name}</Text>
               {on ? <SymbolView name="checkmark" size={16} tintColor={color.accent} weight="bold" /> : null}

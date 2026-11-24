@@ -22,6 +22,7 @@ export type SleepSchedule = {
   wakeSound: WakeSoundId;
   haptics: 'default' | 'none';
   volume: number;
+  gentleWake: boolean;
   // ponytail: allowList는 앱 잠금 단계(6)에서 스크린 타임 토큰으로 채워요
   lock: { allowList: string | null; leadMinutes: 30 | 60 | 90 | 120 };
 };
@@ -34,6 +35,10 @@ export type ExtraAlarm = {
   repeat: boolean[]; // 일~토 7칸
   missions: MissionConfig[];
   antiSnooze: boolean;
+  wakeSound: WakeSoundId;
+  haptics: 'default' | 'none';
+  volume: number;
+  gentleWake: boolean;
 };
 
 export type SleepSound = {

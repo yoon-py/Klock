@@ -1,20 +1,28 @@
+import { DynamicColorIOS, Platform, type ColorValue } from 'react-native';
+
+// iOS는 시스템/앱 화면 모드가 바뀌면 StyleSheet를 다시 만들지 않아도 색이 즉시 바뀌어요.
+const dynamic = (light: string, dark: string): ColorValue => (
+  Platform.OS === 'ios' ? DynamicColorIOS({ light, dark }) : dark
+);
+
 // 디자인 값 한 곳 (CLAUDE.md 디자인 규칙 + design/*.dc.html에서 뽑은 값)
 export const color = {
-  bg: '#000000',
-  card: '#1C1C1E',
-  cardRaised: '#2C2C2E', // 시트 안 그룹 카드
-  fill: '#3A3A3C', // 다이얼 바탕, 빈 미션 칸
-  separator: 'rgba(84,84,88,0.65)',
-  text: '#FFFFFF',
-  textSecondary: '#98989F',
-  textTertiary: '#636366',
-  accent: '#FF9F0A', // 낮 화면 강조
-  night: '#A99DFF', // 수면 탭·수면 중 강조
-  nightText: '#EEEFFA',
-  nightSecondary: '#A3A7C2',
-  goal: '#FFD60A', // 수면 목표 충족
-  danger: '#FF453A',
-  success: '#34C759',
+  bg: dynamic('#F2F2F7', '#09090B'),
+  card: dynamic('#FFFFFF', '#111113'),
+  cardRaised: dynamic('#E9E9ED', '#1C1C1F'), // 시트 안 그룹 카드
+  fill: dynamic('#DEDEE3', '#2C2C30'), // 다이얼 바탕, 빈 미션 칸
+  separator: dynamic('rgba(60,60,67,0.20)', 'rgba(84,84,88,0.55)'),
+  text: dynamic('#111113', '#F5F5F6'),
+  textSecondary: dynamic('#63636A', '#A0A0A7'),
+  textTertiary: dynamic('#85858C', '#6E6E74'),
+  accent: dynamic('#8E8E93', '#F2F2F7'), // 콘텐츠를 방해하지 않는 중립 강조
+  accentCyan: dynamic('#6E6E73', '#D1D1D6'),
+  night: dynamic('#636366', '#E5E5EA'),
+  nightText: dynamic('#1C1C1E', '#F2F2F7'),
+  nightSecondary: dynamic('#717178', '#98989F'),
+  goal: dynamic('#636366', '#D1D1D6'),
+  danger: dynamic('#E54862', '#FF647C'),
+  success: dynamic('#19A85A', '#43E07D'),
 } as const;
 
 // iOS 기본 글자 크기 (시스템 글꼴, 따로 글꼴 파일 없음)

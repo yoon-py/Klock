@@ -31,6 +31,10 @@ export function startAlarmDraft(id?: string) {
           repeat,
           missions: [],
           antiSnooze: true,
+          wakeSound: get('schedule').wakeSound,
+          haptics: get('schedule').haptics,
+          volume: get('schedule').volume,
+          gentleWake: get('schedule').gentleWake,
         },
   };
   emit();
@@ -56,9 +60,6 @@ export function commitDraft() {
   if (draft.alarm) {
     const alarms = get('alarms').filter((a) => a.id !== draft.alarm!.id);
     set('alarms', [...alarms, draft.alarm].sort((a, b) => a.time.localeCompare(b.time)));
-    // 소리·음량은 수면 일정 값을 같이 써요 (SPEC 6.2)
-    const s = get('schedule');
-    set('schedule', { ...s, wakeSound: draft.schedule.wakeSound, volume: draft.schedule.volume, haptics: draft.schedule.haptics });
   } else {
     if (draft.schedule.wakeTime !== get('schedule').wakeTime) set('wakeOnce', null); // 일정을 바꾸면 한 번만 바꾼 기상은 지워요
     set('schedule', { ...draft.schedule, enabled: true });
@@ -85,3 +86,11 @@ export function useDropIfAbandoned(i: number, adding: boolean, kept: () => boole
 }
 
 export const getDraft = () => draft;
+
+/** 편집 중인 대상의 알람 사운드 설정. 추가 알람과 기본 일정을 같은 화면에서 다뤄요. */
+export function updateDraftAlarmSound(values: Partial<Pick<SleepSchedule, 'wakeSound' | 'volume' | 'haptics' | 'gentleWake'>>) {
+  updateDraft((d) => {
+    const target = d.alarm ?? d.schedule;
+    Object.assign(target, values);
+  });
+}

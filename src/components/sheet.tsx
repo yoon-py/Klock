@@ -1,20 +1,15 @@
 // 시트 화면들이 같이 쓰는 부품 (디자인 PlanEdit, AlarmAdd, MissionCount* 의 공통 모양)
 import type { ReactNode } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View, type ColorValue } from 'react-native';
 import { router } from 'expo-router';
 import { SymbolView } from 'expo-symbols';
 import * as Haptics from 'expo-haptics';
 import { color, font } from '../theme';
 import { MISSIONS } from '../missions';
 import { missionLine } from '../missions';
-import { draftMissions, setDraftMissions, updateDraft, useDraft } from '../store/draft';
+import { draftMissions, setDraftMissions, updateDraft, updateDraftAlarmSound, useDraft } from '../store/draft';
 import { Slider, Switch } from './index';
-
-const WAKE_SOUND_NAMES: Record<string, string> = {
-  dawn_bell: '새벽 종소리', sunrise_forest: '해 뜨는 숲', birds: '새소리', stream: '시냇물', piano: '잔잔한 피아노',
-  xylophone: '맑은 실로폰', wind_chime: '바람 풍경', guitar: '경쾌한 기타', classic: '기본 알람음',
-};
-export const WAKE_SOUNDS = Object.entries(WAKE_SOUND_NAMES).map(([id, name]) => ({ id, name }));
+import { wakeSoundName } from '../sounds';
 
 /** × 닫기 / 제목 / ✓ 저장 */
 export function SheetHeader({ title, onSave, saveLabel = '저장' }: { title: string; onSave?: () => void; saveLabel?: string }) {
@@ -40,7 +35,7 @@ export function PushHeader({ title, right }: { title: string; right?: ReactNode 
   );
 }
 
-function CircleButton({ icon, label, tint, onPress }: { icon: 'xmark' | 'checkmark'; label: string; tint?: string; onPress: () => void }) {
+function CircleButton({ icon, label, tint, onPress }: { icon: 'xmark' | 'checkmark'; label: string; tint?: ColorValue; onPress: () => void }) {
   return (
     <Pressable accessibilityLabel={label} onPress={onPress} style={[s.circle, { backgroundColor: tint ?? 'rgba(120,120,128,0.32)' }]}>
       <SymbolView name={icon} size={icon === 'xmark' ? 15 : 18} tintColor="#FFFFFF" weight="bold" />
@@ -60,7 +55,7 @@ export function BottomButtons({ left, onLeft, right, onRight, rightTone = 'accen
         </Pressable>
       ) : null}
       <Pressable disabled={rightDisabled} onPress={onRight} style={[s.btn, { flex: 1, backgroundColor: rightTone === 'accent' ? color.accent : '#F2F2F7', opacity: rightDisabled ? 0.4 : 1 }]}>
-        <Text style={{ fontSize: 17, fontWeight: '700', color: rightTone === 'accent' ? '#1A1205' : '#000000' }}>{right}</Text>
+        <Text style={{ fontSize: 17, fontWeight: '700', color: rightTone === 'accent' ? '#041215' : '#000000' }}>{right}</Text>
       </Pressable>
     </View>
   );
@@ -130,19 +125,27 @@ export function MissionCard() {
 /** 알람 소리: 사운드 및 햅틱 줄 + 음량 슬라이더 */
 export function AlarmSoundCard() {
   const d = useDraft();
+  const alarmSound = d.alarm ?? d.schedule;
   return (
     <View style={{ gap: 8 }}>
       <Text style={[s.caption, { paddingLeft: 18 }]}>알람 소리</Text>
       <View style={s.card}>
-        <Pressable onPress={() => router.push('/wake-sound')} style={({ pressed }) => [s.row, { borderBottomWidth: StyleSheet.hairlineWidth, borderColor: color.separator }, pressed && s.pressed]}>
-          <Text style={{ ...font.body, color: color.text, flex: 1 }}>사운드 및 햅틱</Text>
-          <Text style={{ ...font.body, color: color.textSecondary }}>{WAKE_SOUND_NAMES[d.schedule.wakeSound]}</Text>
+        <Pressable onPress={() => router.push({ pathname: '/sound-library', params: { mode: 'alarm', picker: '1' } })} style={({ pressed }) => [s.row, { borderBottomWidth: StyleSheet.hairlineWidth, borderColor: color.separator }, pressed && s.pressed]}>
+          <Text style={{ ...font.body, color: color.text, flex: 1 }}>사운드</Text>
+          <Text style={{ ...font.body, color: color.textSecondary }}>{wakeSoundName(alarmSound.wakeSound)}</Text>
           <SymbolView name="chevron.right" size={13} tintColor="#8E8E93" weight="semibold" />
         </Pressable>
         <View style={[s.row, { gap: 14 }]}>
           <SymbolView name="speaker.fill" size={18} tintColor="#8E8E93" />
-          <Slider style={{ flex: 1 }} value={d.schedule.volume} onValueChange={(v) => updateDraft((x) => { x.schedule.volume = v; })} accessibilityLabel="알람 음량" />
+          <Slider style={{ flex: 1 }} value={alarmSound.volume} onValueChange={(volume) => updateDraftAlarmSound({ volume })} accessibilityLabel="알람 음량" />
           <SymbolView name="speaker.wave.3.fill" size={18} tintColor="#8E8E93" />
+        </View>
+        <View style={[s.row, { borderTopWidth: StyleSheet.hairlineWidth, borderColor: color.separator }]}>
+          <View style={{ flex: 1, gap: 2 }}>
+            <Text style={{ ...font.body, color: color.text }}>부드럽게 깨우기</Text>
+            <Text style={{ ...font.footnote, color: color.textSecondary }}>30초 동안 소리가 서서히 커져요</Text>
+          </View>
+          <Switch value={alarmSound.gentleWake} onValueChange={(gentleWake) => updateDraftAlarmSound({ gentleWake })} />
         </View>
       </View>
     </View>

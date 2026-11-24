@@ -6,13 +6,24 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/placeholder/icon.png",
-    "userInterfaceStyle": "dark",
+    "userInterfaceStyle": "automatic",
     "ios": {
       "bundleIdentifier": "com.slipper.app",
       "deploymentTarget": "26.0",
       "supportsTablet": false,
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
+        "UIApplicationSceneManifest": {
+          "UIApplicationSupportsMultipleScenes": false,
+          "UISceneConfigurations": {
+            "UIWindowSceneSessionRoleApplication": [
+              {
+                "UISceneConfigurationName": "Default Configuration",
+                "UISceneDelegateClassName": "$(PRODUCT_MODULE_NAME).SceneDelegate"
+              }
+            ]
+          }
+        },
         "NSAlarmKitUsageDescription": "정한 기상 시각에 무음 모드에서도 알람을 울려요.",
         "NSCameraUsageDescription": "사진·바코드·스쿼트 미션에서 카메라를 써요. 영상은 폰 안에서만 확인하고 저장하거나 보내지 않아요.",
         "NSMicrophoneUsageDescription": "따라 말하기 미션과 밤사이 소리를 듣는 데 마이크를 써요. 폰 밖으로 보내지 않아요.",
@@ -28,6 +39,7 @@
       "expo-font",
       "expo-status-bar",
       "expo-audio",
+      "./plugins/with-ios-scene-lifecycle",
       "./plugins/with-mediapipe-link",
       [
         "expo-notifications",
@@ -35,7 +47,13 @@
           "sounds": [
             "./assets/sounds/wake/classic.caf",
             "./assets/placeholder/sounds/dawn_bell.caf",
-            "./assets/placeholder/sounds/xylophone.caf"
+            "./assets/placeholder/sounds/xylophone.caf",
+            "./assets/sounds/wake/sunrise_forest.caf",
+            "./assets/sounds/wake/birds.caf",
+            "./assets/sounds/wake/stream.caf",
+            "./assets/sounds/wake/piano.caf",
+            "./assets/sounds/wake/wind_chime.caf",
+            "./assets/sounds/wake/guitar.caf"
           ]
         }
       ]

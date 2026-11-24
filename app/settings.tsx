@@ -10,6 +10,8 @@ import { color, font } from '../src/theme';
 
 export default function Settings() {
   const [prefs, setPrefs] = useSetting('prefs');
+  const appearance = prefs.appearance ?? 'system';
+  const setAppearance = (next: 'system' | 'light' | 'dark') => setPrefs({ ...prefs, appearance: next });
   return (
     <ScrollView style={{ backgroundColor: color.bg }} contentContainerStyle={{ paddingTop: 54, paddingBottom: 48 }}>
       <Pressable onPress={() => router.back()} style={st.back}>
@@ -19,6 +21,18 @@ export default function Settings() {
       <Text style={{ ...font.largeTitle, color: color.text, paddingHorizontal: 20 }}>설정</Text>
 
       <View style={{ paddingHorizontal: 16, paddingTop: 20, gap: 24 }}>
+        <View style={{ gap: 7 }}>
+          <Text style={st.caption}>화면</Text>
+          <View style={st.group}>
+            <Row icon="circle.lefthalf.filled" tile="#636366" title="시스템 설정" divider onPress={() => setAppearance('system')}
+              right={appearance === 'system' ? <SymbolView name="checkmark" size={16} tintColor={color.accent} weight="semibold" /> : null} />
+            <Row icon="sun.max.fill" tile="#8E8E93" title="라이트" divider onPress={() => setAppearance('light')}
+              right={appearance === 'light' ? <SymbolView name="checkmark" size={16} tintColor={color.accent} weight="semibold" /> : null} />
+            <Row icon="moon.fill" tile="#163D48" title="다크" onPress={() => setAppearance('dark')}
+              right={appearance === 'dark' ? <SymbolView name="checkmark" size={16} tintColor={color.accent} weight="semibold" /> : null} />
+          </View>
+        </View>
+
         <View style={{ gap: 7 }}>
           <Text style={st.caption}>기록</Text>
           <View style={st.group}>

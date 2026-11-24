@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { Animated, Linking, Pressable, Text, View } from 'react-native';
 import { SymbolView } from 'expo-symbols';
-import { ExpoSpeechRecognitionModule as Speech, useSpeechRecognitionEvent } from 'expo-speech-recognition';
 import { Clear, MissionTop, sfx } from '../../src/components/mission';
 import { getRun, quietAlarm } from '../../src/store/run';
 import { VOICE_SENTENCES } from '../../src/missions';
 import { heardWords } from '../../src/speech';
+import { color } from '../../src/theme';
 
 /** 고른 문장 중에서 count개를 겹치지 않게 뽑아요 */
 function pickSentences() {
@@ -18,8 +18,36 @@ function pickSentences() {
 }
 
 type Blocked = null | 'permission' | 'offline';
+type SpeechPackage = typeof import('expo-speech-recognition');
 
-export default function Voice() {
+let cachedSpeech: SpeechPackage | null | undefined;
+
+function getSpeechPackage() {
+  if (cachedSpeech !== undefined) return cachedSpeech;
+  try {
+    cachedSpeech = require('expo-speech-recognition') as SpeechPackage;
+  } catch {
+    cachedSpeech = null;
+  }
+  return cachedSpeech;
+}
+
+export default function VoiceRoute() {
+  const speechPackage = getSpeechPackage();
+  if (!speechPackage) {
+    return (
+      <View style={{ flex: 1, backgroundColor: '#000' }}>
+        <MissionTop progressKey="speech-module-unavailable" />
+        <Clear text="음성 인식 미션을 건너뛰어요" />
+      </View>
+    );
+  }
+  return <Voice speechPackage={speechPackage} />;
+}
+
+function Voice({ speechPackage }: { speechPackage: SpeechPackage }) {
+  const Speech = speechPackage.ExpoSpeechRecognitionModule;
+  const useSpeechRecognitionEvent = speechPackage.useSpeechRecognitionEvent;
   const [list] = useState(pickSentences);
   const [at, setAt] = useState(0); // 몇 번째 문장
   const [heard, setHeard] = useState(0);
@@ -84,20 +112,20 @@ export default function Voice() {
             {blocked === 'permission' ? '마이크·음성 인식 권한이 꺼져 있어요' : '이 폰은 기기 안 음성 인식을 지원하지 않아서 이 미션을 쓸 수 없어요'}
           </Text>
           {blocked === 'permission' ? (
-            <Pressable onPress={() => Linking.openSettings()} style={{ height: 44, paddingHorizontal: 18, borderRadius: 22, backgroundColor: '#2C2C2E', justifyContent: 'center' }}>
-              <Text style={{ fontSize: 17, fontWeight: '600', color: '#FFB547' }}>설정에서 켜기</Text>
+            <Pressable onPress={() => Linking.openSettings()} style={{ height: 44, paddingHorizontal: 18, borderRadius: 22, backgroundColor: color.cardRaised, justifyContent: 'center' }}>
+              <Text style={{ fontSize: 17, fontWeight: '600', color: color.accent }}>설정에서 켜기</Text>
             </Pressable>
           ) : null}
         </View>
       ) : (
         <View style={{ position: 'absolute', left: 0, right: 0, bottom: 172, height: 28, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 4, opacity: listening ? 1 : 0.3 }}>
           {[10, 18, 26, 14, 22, 12, 8].map((h, i) => (
-            <Animated.View key={i} style={{ width: 4, height: h, borderRadius: 2, backgroundColor: '#FFB547', transform: [{ scaleY: listening ? lv : 0.35 }] }} />
+            <Animated.View key={i} style={{ width: 4, height: h, borderRadius: 2, backgroundColor: color.accent, transform: [{ scaleY: listening ? lv : 0.35 }] }} />
           ))}
         </View>
       )}
-      <Pressable accessibilityLabel={listening ? '듣는 중' : '다시 듣기'} onPress={() => { if (!listening) listen(); }} style={{ position: 'absolute', alignSelf: 'center', bottom: 58, width: 76, height: 76, borderRadius: 38, backgroundColor: listening ? '#FFB547' : '#3A3A3C', alignItems: 'center', justifyContent: 'center' }}>
-        <SymbolView name="mic.fill" size={28} tintColor={listening ? '#1A1205' : '#FFF'} />
+      <Pressable accessibilityLabel={listening ? '듣는 중' : '다시 듣기'} onPress={() => { if (!listening) listen(); }} style={{ position: 'absolute', alignSelf: 'center', bottom: 58, width: 76, height: 76, borderRadius: 38, backgroundColor: listening ? color.accent : color.fill, alignItems: 'center', justifyContent: 'center' }}>
+        <SymbolView name="mic.fill" size={28} tintColor={listening ? '#041215' : '#FFF'} />
       </Pressable>
       {done ? <Clear text="문장을 끝까지 읽었어요" /> : null}
     </View>

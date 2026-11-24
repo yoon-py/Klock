@@ -60,7 +60,7 @@ export default function SleepTab() {
             <View style={st.facts}>
               <Fact k="미션" v={missionSummary(schedule.missions)} onPress={openPlan} />
               <Fact k="앱 잠금" v={`${fmtKo(toMin(schedule.bedtime) - schedule.lock.leadMinutes)}부터`} onPress={openPlan} />
-              <Fact k="사운드" v={soundLine(sleepSound.scenes)} onPress={() => router.navigate('/explore')} />
+              <Fact k="수면 사운드" v={soundLine(sleepSound.scenes)} onPress={() => router.navigate({ pathname: '/explore', params: { mode: 'sleep' } })} />
             </View>
           </>
         ) : (
@@ -98,10 +98,10 @@ const st = StyleSheet.create({
   title: { marginHorizontal: 24, fontSize: 31, fontWeight: '700', letterSpacing: -0.6, color: color.nightText },
   sub: { marginTop: 8, marginHorizontal: 24, fontSize: 17, color: color.nightSecondary },
   headRow: { height: 40, paddingHorizontal: 24, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  facts: { marginTop: 6, marginHorizontal: 24, gap: 8 },
-  factKey: { width: 76, fontSize: 16, color: '#8E90A8' },
+  facts: { marginTop: 6, marginHorizontal: 24, gap: 10 },
+  factKey: { width: 92, fontSize: 16, color: '#8E90A8' },
   factVal: { fontSize: 16, color: color.nightText },
-  factBox: { height: 34, paddingHorizontal: 12, borderRadius: 10, backgroundColor: 'rgba(169,157,255,0.14)', flexDirection: 'row', alignItems: 'center', gap: 6 },
-  setBtn: { height: 44, paddingHorizontal: 18, borderRadius: 22, backgroundColor: 'rgba(169,157,255,0.14)', justifyContent: 'center' },
-  start: { marginHorizontal: 24, height: 58, borderRadius: 29, backgroundColor: color.night, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10 },
+  factBox: { height: 34, paddingHorizontal: 12, borderRadius: 10, backgroundColor: 'rgba(255,255,255,0.08)', flexDirection: 'row', alignItems: 'center', gap: 6 },
+  setBtn: { height: 44, paddingHorizontal: 18, borderRadius: 22, backgroundColor: 'rgba(255,255,255,0.08)', justifyContent: 'center' },
+  start: { flexShrink: 0, marginTop: 24, marginHorizontal: 24, height: 58, borderRadius: 29, backgroundColor: color.night, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10 },
 });

@@ -75,8 +75,8 @@ const SIZE = 260;
 const st = StyleSheet.create({
   close: { position: 'absolute', left: 12, width: 44, height: 44, alignItems: 'center', justifyContent: 'center', zIndex: 5 },
   head: { position: 'absolute', left: 0, right: 0, textAlign: 'center', fontSize: 17, fontWeight: '600', color: '#8E90A8' },
-  ringOuter: { position: 'absolute', width: SIZE, height: SIZE, borderRadius: SIZE / 2, borderWidth: 1, borderColor: 'rgba(169,157,255,0.18)', marginTop: -120 },
-  circle: { width: SIZE, height: SIZE, borderRadius: SIZE / 2, backgroundColor: 'rgba(169,157,255,0.42)', marginTop: -120 },
+  ringOuter: { position: 'absolute', width: SIZE, height: SIZE, borderRadius: SIZE / 2, borderWidth: 1, borderColor: 'rgba(255,255,255,0.18)', marginTop: -120 },
+  circle: { width: SIZE, height: SIZE, borderRadius: SIZE / 2, backgroundColor: 'rgba(255,255,255,0.28)', marginTop: -120 },
   label: { marginTop: 60, fontSize: 28, fontWeight: '600', color: color.nightText },
   count: { marginTop: 12, fontSize: 16, color: '#8E90A8' },
   foot: { position: 'absolute', left: 24, right: 24, textAlign: 'center', fontSize: 13, color: '#5D6078' },

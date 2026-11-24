@@ -1,7 +1,7 @@
 // 공통 부품. 애플 기본 부품(스위치·슬라이더·다이얼)을 Slipper 색으로 맞춰 쓰고,
 // 그룹 목록만 직접 만들어요 (설정 앱 같은 둥근 카드 + 줄).
 import { Children, type ReactNode } from 'react';
-import { Pressable, Switch as RNSwitch, StyleSheet, Text, View, type SwitchProps } from 'react-native';
+import { Pressable, Switch as RNSwitch, StyleSheet, Text, View, type ColorValue, type SwitchProps } from 'react-native';
 import RNSlider, { type SliderProps } from '@react-native-community/slider';
 import { Picker } from '@react-native-picker/picker';
 import { SymbolView } from 'expo-symbols';
@@ -47,17 +47,17 @@ export function Row({ title, subtitle, value, onPress, accessory }: {
 }
 
 export function Switch(props: SwitchProps & { tint?: string }) {
-  return <RNSwitch trackColor={{ true: props.tint ?? color.accent }} {...props} />;
+  return <RNSwitch trackColor={{ true: (props.tint ?? color.accent) as string }} {...props} />;
 }
 
 /** 음량 슬라이더. 5%마다 가벼운 햅틱 (SPEC 6.3) */
-export function Slider({ tint = color.accent, ...props }: SliderProps & { tint?: string }) {
+export function Slider({ tint = color.accent, ...props }: SliderProps & { tint?: ColorValue }) {
   return (
     <RNSlider
       minimumValue={0}
       maximumValue={1}
       step={0.05}
-      minimumTrackTintColor={tint}
+      minimumTrackTintColor={tint as string}
       maximumTrackTintColor="rgba(120,120,128,0.36)"
       thumbTintColor="#FFFFFF"
       {...props}

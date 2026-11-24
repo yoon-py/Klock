@@ -21,12 +21,12 @@ export default function BlockSetup() {
       <View style={{ paddingHorizontal: 16, paddingTop: 20, gap: 7 }}>
         <Text style={{ ...font.footnote, color: color.textSecondary, paddingLeft: 16 }}>잠그지 않을 앱 · {count}개</Text>
         <View style={st.group}>
-          <AppRow icon="moon.fill" tile="#1E1F4A" tint="#C9C2FF" name="Slipper" />
+          <AppRow icon="moon.fill" tile="#2C2C30" tint="#D1D1D6" name="Slipper" />
           <AppRow icon="phone.fill" tile="#30A46C" tint="#FFF" name="전화 · 긴급 통화" />
           <Pressable
             onPress={() => Alert.alert('스크린 타임 앱 선택', '애플의 앱 선택 화면은 설치판(TestFlight)에서 열려요.')}
             style={({ pressed }) => [st.row, pressed && { backgroundColor: 'rgba(255,255,255,0.06)' }]}>
-            <View style={[st.tile, { backgroundColor: 'rgba(255,159,10,0.14)' }]}>
+            <View style={[st.tile, { backgroundColor: 'rgba(0,221,179,0.14)' }]}>
               <SymbolView name="plus" size={15} tintColor={color.accent} weight="bold" />
             </View>
             <Text style={{ fontSize: 17, color: color.accent }}>열어 둘 앱 더하기</Text>

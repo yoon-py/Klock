@@ -71,11 +71,16 @@ export function resumeNight() {
 /** 고른 소리를 틀고 끄는 시간을 맞춰요. resetTimer=false면 끄는 시각은 그대로 (소리 섞기에서 장면을 더하거나 뺄 때) */
 export async function startSound(resetTimer = true) {
   stopPlayers();
-  const s = get('sleepSound');
+  const stored = get('sleepSound');
+  const playable = stored.scenes.filter((id) => !!scene(id)?.sound).slice(0, 2);
+  const scenes = playable.length ? playable : ['brown' as const];
+  const s = playable.length === stored.scenes.length ? stored : { ...stored, scenes };
+  if (s !== stored) set('sleepSound', s);
   const wake = nextWake();
   // 최근에 들은 조합 맨 앞에 (같은 조합은 앞으로 옮김, SPEC 8장)
   if (s.scenes.length) set('sleepSound', { ...s, recent: [s.scenes, ...(s.recent ?? []).filter((r) => r.join() !== s.scenes.join())].slice(0, 3) });
-  await setAudioModeAsync({ playsInSilentMode: true, shouldPlayInBackground: true });
+  // 녹음 화면을 거쳐 다시 재생할 때도 수화기가 아니라 스피커로 나가게 녹음 모드를 명시적으로 꺼요.
+  await setAudioModeAsync({ allowsRecording: false, shouldRouteThroughEarpiece: false, playsInSilentMode: true, shouldPlayInBackground: true });
   const a = scene(s.scenes[0])?.sound, b = scene(s.scenes[1])?.sound;
   if (a) players.a = loop(a, s.volumes.sceneA);
   if (b) players.b = loop(b, s.volumes.sceneB);

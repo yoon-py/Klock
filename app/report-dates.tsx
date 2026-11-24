@@ -27,14 +27,14 @@ export default function ReportDates() {
           const snoreSec = n?.sounds.filter((x) => x.kind === 'snore').reduce((a, x) => a + x.durationSec, 0) ?? 0;
           const on = sel === date;
           return (
-            <Pressable key={date} onPress={() => setSel(date)} style={[st.row, on && { backgroundColor: 'rgba(255,181,71,0.16)' }]}>
+            <Pressable key={date} onPress={() => setSel(date)} style={[st.row, on && { backgroundColor: 'rgba(0,221,179,0.14)' }]}>
               <View style={{ gap: 2 }}>
                 <Text style={{ fontSize: 15, fontWeight: on ? '600' : '500', color: '#FFF' }}>{label(date)}</Text>
                 <Text style={{ fontSize: 12, color: '#6C6C70' }}>{(date === today ? '오늘 · ' : '') + (slept ? durKo(slept) : '기록 없음')}</Text>
               </View>
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
                 <Text style={{ fontSize: 15, color: '#C7C7CC' }}>{snoreSec ? `코골이 ${Math.max(1, Math.round(snoreSec / 60))}분` : '코골이 없음'}</Text>
-                {on ? <SymbolView name="checkmark.circle" size={18} tintColor="#FFB547" /> : null}
+                {on ? <SymbolView name="checkmark.circle" size={18} tintColor={color.accent} /> : null}
               </View>
             </Pressable>
           );

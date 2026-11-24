@@ -68,6 +68,17 @@
 | sounds/wake/classic.caf | 기상 사운드 · 기본 알람음 | 합성 (scripts/make-sounds.sh) | 자체 제작 | 2026-10-16 | 스크립트 자체 |
 | placeholder/sounds/dawn_bell.caf, xylophone.caf | 새벽 종소리·맑은 실로폰 **임시** | 합성 | 자체 제작 | 2026-10-16 | 출시 전 교체 권장 |
 | placeholder/sounds/scene_fan.m4a, scene_snow.m4a | 선풍기 바람·눈 오는 밤 **임시** | 합성 잡음 | 자체 제작 | 2026-10-16 | 출시 전 교체 권장 |
+| sounds/sleep/fire.m4a | 수면 사운드 · 모닥불 | Freesound 263864 · ceich93 | CC0 1.0 | 2026-11-24 | assets/licenses/freesound/fire-263864.html |
+| sounds/sleep/rain.m4a | 수면 사운드 · 창문 빗소리 | Freesound 669621 · Nickisawsome74 | CC0 1.0 | 2026-11-24 | assets/licenses/freesound/rain-669621.html |
+| sounds/sleep/sea.m4a | 수면 사운드 · 파도 | Freesound 757115 · jcdeegs123 | CC0 1.0 | 2026-11-24 | assets/licenses/freesound/sea-757115.html |
+| sounds/sleep/train.m4a | 수면 사운드 · 기차 실내 | Freesound 799526 · Throndronis | CC0 1.0 | 2026-11-24 | assets/licenses/freesound/train-799526.html |
+| sounds/sleep/bugs.m4a | 수면 사운드 · 밤 귀뚜라미 | Freesound 320145 · OwlStorm | CC0 1.0 | 2026-11-24 | assets/licenses/freesound/bugs-320145.html |
+| sounds/wake/sunrise_forest.m4a·caf | 기상 사운드 · 해 뜨는 숲 | Freesound 570978 · Nikolai_Ch | CC0 1.0 | 2026-11-24 | assets/licenses/freesound/sunrise-570978.html |
+| sounds/wake/birds.m4a·caf | 기상 사운드 · 새소리 | Freesound 275989 · Sandermotions | CC0 1.0 | 2026-11-24 | assets/licenses/freesound/birds-275989.html |
+| sounds/wake/stream.m4a·caf | 기상 사운드 · 시냇물 | Freesound 388733 · Inkahootz81 | CC0 1.0 | 2026-11-24 | assets/licenses/freesound/stream-388733.html |
+| sounds/wake/piano.m4a·caf | 기상 사운드 · 잔잔한 피아노 | Freesound 517338 · f-r-a-g-i-l-e | CC0 1.0 | 2026-11-24 | assets/licenses/freesound/piano-517338.html |
+| sounds/wake/wind_chime.m4a·caf | 기상 사운드 · 바람 풍경 | Freesound 426309 · MTJohnson | CC0 1.0 | 2026-11-24 | assets/licenses/freesound/wind-chime-426309.html |
+| sounds/wake/guitar.m4a·caf | 기상 사운드 · 경쾌한 기타 | Freesound 615550 · ceottaki | CC0 1.0 | 2026-11-24 | assets/licenses/freesound/guitar-615550.html |
 | dawn_bell.m4a | 기상 사운드 · 새벽 종소리 | | | | |
 | scene_fire.m4a / scene_fire.mp4 | 수면 장면 · 모닥불 | | | | |
 | squat_demo.mp4 | 스쿼트 예시 | 직접 촬영 | 자체 제작 | | 출연 동의서 |

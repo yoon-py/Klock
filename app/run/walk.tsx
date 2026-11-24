@@ -2,12 +2,38 @@
 // ponytail: 아이폰은 걸음 수를 몇 초에 한 번씩 묶어서 알려 줘서 숫자가 한 번에 여러 개 줄 수 있어요.
 import { useEffect, useRef, useState } from 'react';
 import { Linking, Pressable, Text, View } from 'react-native';
-import { Pedometer } from 'expo-sensors';
 import { BigCount, Clear, MissionTop, Prepare, sfx, st as m } from '../../src/components/mission';
 import { getRun } from '../../src/store/run';
 import { color } from '../../src/theme';
 
-export default function Walk() {
+type SensorsPackage = typeof import('expo-sensors');
+
+let cachedSensors: SensorsPackage | null | undefined;
+
+function getSensorsPackage() {
+  if (cachedSensors !== undefined) return cachedSensors;
+  try {
+    cachedSensors = require('expo-sensors') as SensorsPackage;
+  } catch {
+    cachedSensors = null;
+  }
+  return cachedSensors;
+}
+
+export default function WalkRoute() {
+  const sensorsPackage = getSensorsPackage();
+  if (!sensorsPackage) {
+    return (
+      <View style={{ flex: 1, backgroundColor: '#000' }}>
+        <MissionTop progressKey="pedometer-module-unavailable" />
+        <Clear text="걷기 미션을 건너뛰어요" />
+      </View>
+    );
+  }
+  return <Walk Pedometer={sensorsPackage.Pedometer} />;
+}
+
+function Walk({ Pedometer }: { Pedometer: SensorsPackage['Pedometer'] }) {
   const mission = getRun().missions[getRun().index];
   const total = mission?.type === 'walk' ? mission.steps : 50;
   const [phase, setPhase] = useState<'prep' | 'count' | 'clear' | 'denied'>('prep');

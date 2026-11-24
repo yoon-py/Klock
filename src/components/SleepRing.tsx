@@ -88,16 +88,16 @@ export function SleepRing({ bed, wake, onChange, onDrag }: { bed: number; wake: 
     .onFinalize(end), []); // 안에서 ref만 읽어서 한 번만 만들어요
 
   const dur = mod(wake - bed, 1440), ok = dur >= GOAL_MIN;
-  const tone = ok ? color.goal : '#636366';
+  const tone = ok ? color.goal : color.textTertiary;
   const [x0, y0] = pt(bed), [x1, y1] = pt(wake);
   const arc = `M${x0} ${y0} A ${R} ${R} 0 ${dur > 720 ? 1 : 0} 1 ${x1} ${y1}`;
-  const iconTint = ok ? '#4D3F00' : '#E5E5EA';
+  const iconTint = ok ? '#041215' : '#E5E5EA';
 
   return (
     <GestureDetector gesture={pan}>
     <View style={{ width: SIZE, height: SIZE, alignSelf: 'center' }}>
       <Svg width={SIZE} height={SIZE} pointerEvents="none">
-        <Circle cx={C} cy={C} r={152} fill="#000000" />
+        <Circle cx={C} cy={C} r={152} fill={color.bg} />
         <Circle cx={C} cy={C} r={104} fill={color.cardRaised} />
         {TICKS.map((t, i) => (
           <Line key={i} x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2} stroke={t.major ? '#8E8E93' : '#545458'} strokeWidth={t.major ? 1.6 : 1} strokeLinecap="round" />
@@ -115,7 +115,7 @@ export function SleepRing({ bed, wake, onChange, onDrag }: { bed: number; wake: 
       <Knob x={x0} y={y0} icon="bed.double.fill" tint={iconTint} />
       <Knob x={x1} y={y1} icon="alarm.fill" tint={iconTint} />
       <View pointerEvents="none" style={{ position: 'absolute', left: C - 8, top: 102 }}>
-        <SymbolView name="moon.fill" size={16} tintColor="#7D7AFF" />
+        <SymbolView name="moon.fill" size={16} tintColor={color.night} />
       </View>
       <View pointerEvents="none" style={{ position: 'absolute', left: C - 10, top: 198 }}>
         <SymbolView name="sun.max.fill" size={20} tintColor={color.goal} />
